@@ -25,12 +25,14 @@
     "@umijs/test": "^3.2.23",
     "cross-env": "^7.0.2",
     "lint-staged": "^10.0.7",
+    "node-sass": "^4.14.1",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "umi": "^3.2.23",
+    "vconsole": "^3.3.4",
     "yorkie": "^2.0.0"
   }
 }
