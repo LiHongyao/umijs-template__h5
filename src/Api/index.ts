@@ -4,9 +4,9 @@ export default {
   test
 }
 
-// 调用 Api.test.reqGet
-// 调用 Api.test.reqPost
-
+// 请求示例
+// test.reqGet<XXX.BaseResponse<{响应数据类型}>>(params).then().catch();
+// test.reqPost<XXX.BaseResponse<{响应数据类型}>>(data).then().catch();
 
 
 

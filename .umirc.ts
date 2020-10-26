@@ -8,9 +8,7 @@ export default defineConfig({
   // 配置是否让生成的文件包含 hash 后缀，通常用于增量发布和避免浏览器加载缓存
   hash: true,
   // 路由模式
-  history: {
-    type: 'browser',
-  },
+  history: { type: 'browser' },
   // 自定义字体
   chainWebpack(config) {
     config.module
@@ -19,18 +17,19 @@ export default defineConfig({
       .use('file-loader')
       .loader('file-loader');
   },
-  // sass
+  // 支持sass => npm install node-sass
   /*
   sass: {
     implementation: require('node-sass'),
   },*/
-  
-  // dva
+
+  // 状态管理：dva
   dva: {},
+  // 动态加载loading
   dynamicImport: {
     loading: '@/Loading',
   },
-  // H5布局适配
+  // 移动端布局适配
   extraPostCSSPlugins: [
     require('postcss-flexbugs-fixes'),
     require('postcss-px-to-viewport')({
@@ -42,6 +41,7 @@ export default defineConfig({
       mediaQuery: false, // 允许在媒体查询中转换`px`
     }),
   ],
+  // 路由管理
   routes: [
     // 主页
     { exact: true, path: '/', component: '@/pages/IndexPage' },
