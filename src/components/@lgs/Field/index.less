@@ -1,0 +1,30 @@
+.lg-field {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  align-items: center;
+}
+
+.lg-field__control {
+  flex: 1;
+  height: 100%;
+  font-size: var(--size);
+  background-color: transparent;
+  &::placeholder {
+    color: var(--placeholder-color);
+    font-size: var(--placeholder-size);
+    background-color: transparent;
+  }
+  &:disabled {
+    color: #A8A8A8;
+    // fix disabled color in mobile safari
+    -webkit-text-fill-color: #A8A8A8;
+  }
+}
+.lg-field__clear {
+  width: 13px;
+  height: 13px;
+  margin-left: 12px;
+}

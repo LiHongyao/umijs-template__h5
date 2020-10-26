@@ -1,0 +1,36 @@
+.lg-dialog {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: all .25s linear;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.visible {
+    z-index: 999;
+    opacity: 1;
+  }
+}
+
+.lg-dialog__content {
+  width: 268px;
+  background-color: #ffffff;
+  padding: 20px 15px;
+  border-radius: 25px;
+  position: relative;
+}
+
+.lg-dialog__close {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: -40px;
+  right: 0;
+}

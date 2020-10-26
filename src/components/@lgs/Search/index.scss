@@ -1,0 +1,29 @@
+.lg-search {
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lg-search .lg-field {
+  padding: 0 10px;
+}
+
+
+.lg-search__buttton {
+  padding: 0 20px;
+  height: 30px;
+  margin-left: 12px;
+  flex-shrink: 0;
+  background-color: #F82F5C;
+  color: #FFFFFF;
+  font-size: 12px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+

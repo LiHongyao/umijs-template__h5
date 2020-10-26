@@ -1,0 +1,40 @@
+.lg-loading2 {
+  text-align: center;
+  .lg-loading2__ct{
+    position: relative;
+    width: 64px;
+    height: 64px;
+    background: url('./images/logo.png') center center no-repeat;
+    background-size: 22px;
+    margin: 0 auto;
+    .lg-loading2__icon {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: url('./images/border.png') center center no-repeat;
+      background-size: contain;
+      -webkit-animation: rotate 1s linear infinite;
+      animation: rotate 1s linear infinite;
+    }
+  }
+
+  .lg-loading2__tips {
+    font-size: 12px;
+    margin-top: 12px;
+    letter-spacing: 1px;
+    color: #999999;
+  }
+}
+
+@keyframes rotate {
+	to {
+		transform: rotateZ(360deg);
+	}
+}
+@-webkit-keyframes rotate {
+	to {
+		-webkit-transform: rotateZ(360deg);
+	}
+}

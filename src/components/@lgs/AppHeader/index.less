@@ -1,0 +1,67 @@
+@titleBarHeight: 44PX;
+@padding: 16PX;
+
+.app-header {
+  .app-header__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+  }
+  .app-header__titleBar {
+    width: 100%;
+    height: @titleBarHeight;
+    position: relative;
+
+    .app-header__leftButton {
+      position: absolute;
+      left: @padding;
+      top: 50%;
+      transform: translateY(-50%);
+      
+      .app-header__backButton {
+        &.app {
+          width: @titleBarHeight;
+          height: @titleBarHeight;
+          background-size: 20px 20px !important;
+        }
+        &.h5 {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, .5) !important;
+          background-position: center center !important;
+          background-size: 16px 16px !important;
+        }
+      }
+    }
+
+    .app-header__title {
+      text-align: center;
+      line-height: @titleBarHeight;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .app-header__rightButton {
+      font-size: 14px;
+      position: absolute;
+      right: @padding;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .app-header__mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,13 @@
+@keyframes loading {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+.lg-loading {
+  display: flex;
+  justify-content: center;
+}
+
+.lg-loading__img {
+  animation: loading .75s ease-in infinite;
+}
