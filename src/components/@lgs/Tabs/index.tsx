@@ -174,6 +174,7 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
     <div ref={tabsWrapperRef} className="lg-tabs">
       {menuRef && isSticky && (
         <div
+          className="lg-tabs__menu"
           style={{
             width: tabsWrapperRef.current?.offsetWidth,
             height: tabsWrapperRef.current?.offsetHeight,

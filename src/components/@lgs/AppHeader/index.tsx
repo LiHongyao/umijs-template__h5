@@ -18,13 +18,17 @@ interface IProps {
   type?: 'APP' | 'H5';
 
   rightButtonText?: string;
-  renderRight?: () => JSX.Element;
 
-  showLeftButton?: boolean;
+  renderRight?: () => JSX.Element;
   renderLeft?: () => JSX.Element;
 
-  onRightButtonClick?: () => void;
-  onLeftButtonTap?: () => void;
+  showBack?: boolean;
+  showRefresh?: boolean;
+
+  onBack?: () => void;
+  onRefresh?: () => void;
+
+  onRightButtonTap?: () => void;
 }
 
 interface IRefs {
@@ -44,11 +48,13 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
       ? 'transparent'
       : 'linear-gradient(to right, #FFD24D, #FFB80D)',
     rightButtonText,
-    showLeftButton,
+    showBack,
+    showRefresh,
     theme = 'light',
     type = 'APP',
-    onLeftButtonTap,
-    onRightButtonClick,
+    onBack,
+    onRightButtonTap,
+    onRefresh,
     renderRight,
     renderLeft,
   } = props;
@@ -61,11 +67,11 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
 
   // events
   const handleRightButtonTap = () => {
-    onRightButtonClick && onRightButtonClick();
+    onRightButtonTap && onRightButtonTap();
   };
   const handleGoBackButtonTap = () => {
-    if (onLeftButtonTap) {
-      onLeftButtonTap();
+    if (onBack) {
+      onBack();
     } else if (Utils.query('appBack') === '1') {
       jsBridge.goBack();
     } else {
@@ -85,11 +91,9 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
   };
   // effects
   useEffect(() => {
+    // window && /iPhone/i.test(window.navigator.userAgent) && window.screen.height >= 812 && window.devicePixelRatio >= 2,
     setIsBangScreen(
-      window &&
-        /iPhone/i.test(window.navigator.userAgent) &&
-        window.screen.height >= 812 &&
-        window.devicePixelRatio >= 2,
+      window && window.screen.height >= 812 && window.devicePixelRatio >= 2,
     );
   }, []);
   useEffect(() => {
@@ -117,16 +121,15 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
           height: isBangScreen ? '88px' : '64px',
         }}
       >
-        {/* 自定义视图 */}
+        {/* 标题栏 */}
         <div className="app-header__titleBar">
           {/* 左侧按钮 */}
-          <div
-            className="app-header__leftButton"
-            onClick={handleGoBackButtonTap}
-          >
-            {showLeftButton && (
+          <div className="app-header__leftButton">
+            {showBack && (
               <div
-                className={`app-header__backButton ${type === 'APP' ? 'app' : 'h5'}`}
+                className={`app-header__backButton ${
+                  type === 'APP' ? 'app' : 'h5'
+                }`}
                 style={{
                   background: `url(${
                     theme === 'dark'
@@ -134,6 +137,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
                       : require('./images/back_btn_light.png')
                   }) no-repeat 0 center`,
                 }}
+                onClick={handleGoBackButtonTap}
               />
             )}
             {renderLeft && renderLeft()}
@@ -142,7 +146,27 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
           <div className="app-header__title">{title}</div>
           {/* 右侧按钮 */}
           <div className="app-header__rightButton">
-            <span onClick={handleRightButtonTap}>{rightButtonText}</span>
+            {rightButtonText && (
+              <span onClick={handleRightButtonTap}>{rightButtonText}</span>
+            )}
+            {showRefresh && (
+              <div
+                className={`app-header__refreshButton ${
+                  type === 'APP' ? 'app' : 'h5'
+                }`}
+                style={{
+                  background: `url(${
+                    theme === 'dark'
+                      ? require('./images/refresh_btn_dark.png')
+                      : require('./images/refresh_btn_light.png')
+                  }) no-repeat 100% center`,
+                }}
+                onClick={() => {
+                  onRefresh && onRefresh();
+                }}
+              />
+            )}
+
             {renderRight && renderRight()}
           </div>
         </div>

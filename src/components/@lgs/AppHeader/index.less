@@ -1,5 +1,5 @@
-@titleBarHeight: 44PX;
-@padding: 16PX;
+@titleBarHeight: 44px;
+@padding: 16px;
 
 .app-header {
   .app-header__wrapper {
@@ -23,36 +23,38 @@
       left: @padding;
       top: 50%;
       transform: translateY(-50%);
-      
-      .app-header__backButton {
-        &.app {
-          width: @titleBarHeight;
-          height: @titleBarHeight;
-          background-size: 20px 20px !important;
-        }
-        &.h5 {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background-color: rgba(255, 255, 255, .5) !important;
-          background-position: center center !important;
-          background-size: 16px 16px !important;
-        }
-      }
     }
 
     .app-header__title {
       text-align: center;
       line-height: @titleBarHeight;
-      font-weight: bold;
-      font-size: 20px;
+      font-size: 18px;
     }
     .app-header__rightButton {
+      display: flex;
+      align-items: center;
       font-size: 14px;
       position: absolute;
       right: @padding;
       top: 50%;
       transform: translateY(-50%);
+    }
+
+    .app-header__refreshButton,
+    .app-header__backButton {
+      &.app {
+        width: @titleBarHeight;
+        height: @titleBarHeight;
+        background-size: 20px 20px !important;
+      }
+      &.h5 {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        background-position: center center !important;
+        background-size: 16px 16px !important;
+      }
     }
   }
   .app-header__mask {

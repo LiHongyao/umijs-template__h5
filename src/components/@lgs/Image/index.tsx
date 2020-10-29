@@ -1,27 +1,34 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, CSSProperties } from 'react';
+import './index.less';
 
 interface IProps {
-  className?: string
-  src: string
+  src: string;
+  defaultImage?: any;
+  customCls?: string;
+  style?: CSSProperties;
 }
 const _Image: React.FC<IProps> = props => {
-  const { src, className } = props;
-  const [imgSrc, setImgSrc] = useState('http://www.shuoshuokong.com/d/file/2019-01/8481e48f8586fd81214f07659818eec1.jpg');
+  const { src, customCls, style, defaultImage } = props;
+  const [innerSrc, setInnerSrc] = useState(defaultImage);
 
   useEffect(() => {
     const image = new Image();
     image.onload = function() {
-      if(image.width > 1) {
-        setImgSrc(src);
+      if (image.width > 1) {
+        setInnerSrc(src);
       }
-    }
+    };
     image.src = src;
-  }, [src]); 
+  }, [src]);
 
   return (
-    <img className={className} src={imgSrc} alt=""/>
-  )
-} 
-
+    <img
+      className={`lg-image ${customCls || ''}`}
+      style={style}
+      src={innerSrc}
+      alt=""
+    />
+  );
+};
 
 export default memo(_Image);

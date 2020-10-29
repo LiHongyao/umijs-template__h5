@@ -38,7 +38,7 @@
  *
  * 6. getData 里面返回promise
  */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useImperativeHandle } from 'react';
 
 import { usePullDown, usePullUp } from './hooks';
 
@@ -75,6 +75,7 @@ export enum kPullType {
 BScroll.use(Pullup).use(PullDown);
 
 interface IProps {
+  children: JSX.Element | JSX.Element[];
   height?: number;
   onScroll?: Function;
   onPullUp?: Function;
@@ -83,7 +84,12 @@ interface IProps {
   pullDownStatus?: kPullDownStatus;
 }
 
-const Scroll: React.FC<IProps> = props => {
+export interface IScroll {
+  bScroll: BScroll | null;
+}
+interface IRefs extends IScroll {}
+
+const Scroll = React.forwardRef<IRefs, IProps>((props, ref) => {
   const {
     height = 500,
     pullUpStatus,
@@ -97,7 +103,7 @@ const Scroll: React.FC<IProps> = props => {
   const lgScrollRef = useRef<HTMLDivElement>(null);
 
   // states
-  const [bScroll, setBScroll] = useState<any>(null);
+  const [bScroll, setBScroll] = useState<BScroll | null>(null);
 
   // initialize
   useEffect(() => {
@@ -191,6 +197,14 @@ const Scroll: React.FC<IProps> = props => {
     }
   }, [bScroll, height]);
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      bScroll,
+    }),
+    [bScroll],
+  );
+
   return (
     <div
       className="lg-scroll"
@@ -213,7 +227,7 @@ const Scroll: React.FC<IProps> = props => {
       </div>
     </div>
   );
-};
+});
 
 export { usePullDown, usePullUp };
 
