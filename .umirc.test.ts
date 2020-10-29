@@ -5,7 +5,7 @@ export default defineConfig({
   // publicPath: '/umi-ddou-h5/',
   // 2. 定义环境变量
   define: {
-    "process.env.NAME": 'development',
+    "process.env.NAME": 'test',
     "process.env.HOST": '此处为测试环境服务器地址'
   },
 });

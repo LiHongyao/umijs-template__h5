@@ -1,4 +1,4 @@
-import { Toast  } from 'antd-mobile';
+import { Toast } from 'antd-mobile';
 import vconsole from 'vconsole'
 
 // 1. 全局配置Toast
@@ -8,7 +8,7 @@ Toast.config({
 });
 
 // 2. 配置vconsole
-if(process.env.FLAG === 'development') {
+if (process.env.NAME && /(development|test)/.test(process.env.NAME)) {
   new vconsole();
 }
 

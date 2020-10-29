@@ -1,5 +1,5 @@
 import useDateCountdown from './useDateCountdown';
 import useTitle from './useTitle';
-import useSetInterval from './useSetInterval';
+import useInterval from './useInterval';
 
-export { useDateCountdown, useTitle, useSetInterval };
+export { useDateCountdown, useTitle, useInterval };

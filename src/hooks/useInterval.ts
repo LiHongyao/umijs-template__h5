@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-type CBType = () => Function | undefined;
-
-function useSetInterval(cb: CBType, delay: number = 1000) {
-  const cbRef = useRef<CBType>();
-
+function useInterval(cb: Function, delay: number = 1000) {
+  const cbRef = useRef<Function>();
   // 缓存函数
   useEffect(() => {
     cbRef.current = cb;
   }, [cb]);
+
   // 定时器
   useEffect(() => {
     let timer = setInterval(() => {
@@ -22,4 +20,4 @@ function useSetInterval(cb: CBType, delay: number = 1000) {
   }, [delay, cbRef]);
 }
 
-export default useSetInterval;
+export default useInterval;

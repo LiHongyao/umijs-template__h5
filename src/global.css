@@ -79,44 +79,13 @@ input { outline: none; border: none; }
 //////////////////////////////
 */
 .color-FFFFFF { color: #FFFFFF; }
-.color-545454 { color: #545454; }
-.color-575757 { color: #575757; }
-.color-242424 { color: #242424; }
-.color-858585 { color: #858585; }
-.color-FFB200 { color: #FFB200; }
-.color-A5A5A5 { color: #A5A5A5; }
-.color-FFB200 { color: #FFB200; }
-.color-FFDE8D { color: #ffde8d; }
-.color-5B97FF { color: #5B97FF; }
-.color-FF3131 { color: #FF3131; }
-.color-4500CD { color: #4500CD; }
 .color-999999 { color: #999999; }
-.color-DDDDDD { color: #DDDDDD; }
-.color-66482D { color: #66482D; }
-.color-DFA15B { color: #DFA15B; }
 .color-333333 { color: #333333; }
 .color-666666 { color: #666666; }
-.color-FF5A5A { color: #FF5A5A; }
-.color-FFF3D1 { color: #FFF3D1; }
-.color-BD6E3C { color: #BD6E3C; }
-.color-AA5509 { color: #AA5509; } 
-.color-66482D { color: #66482d; }
 .color-888888 { color: #888888; }
-.color-E1B577 { color: #E1B577; }
-.color-C7C6FF { color: #C7C6FF; }
-.color-B5B5B5 { color: #B5B5B5; }
 
 .bg-EEEEEE { background-color: #EEEEEE; }
-.bg-DEDEDE { background-color: #DEDEDE; }
-.bg-6C44F3 { background-color: #6C44F3; }
-.bg-F9F9F9 { background-color: #F9F9F9; }
-.bg-FCF9F2 { background-color: #FCF9F2; }
-.bg-FF5A5A { background-color: #FF5A5A; }
-.bg-FEF7E3 { background-color: #FEF7E3; }
 .bg-333333 { background-color: #333333; }
-.bg-FF0624 { background-color: #FF0624; }
-.bg-968BFF { background-color: #968BFF; }
-.bg-FFFFFF { background-color: #FFFFFF; }
 .bg-000000 { background-color: #000000; }
 
 
