@@ -1,7 +1,9 @@
+import { history } from 'umi';
+
 class Utils {
   // 构造单例
   private static instance: Utils;
-  private constructor() {}
+  private constructor() { }
   static defaultUtils() {
     if (!this.instance) {
       this.instance = new Utils();
@@ -120,6 +122,53 @@ class Utils {
         reject();
       }
     });
+  }
+
+  /**
+   * 时间倒计时（返回时分秒）
+   * @param timeStamp 时间戳
+   * @param pending   倒计时持续状态
+   * @param complete  倒计时结束
+   */
+  public static timeDown(params: {
+    timeStamp: number;
+    pending: (time: string) => void;
+    complete: () => void;
+  }) {
+    function formatNumber(n: number | string) {
+      n = n.toString();
+      return n[1] ? n : '0' + n;
+    }
+    let { timeStamp, pending, complete } = params;
+    if (timeStamp <= 0) {
+      complete();
+    } else {
+      const tick = () => {
+        timeStamp -= 1000;
+        let hours = formatNumber(Math.floor((timeStamp / 1000 / 60 / 60) % 24));
+        let minutes = formatNumber(Math.floor((timeStamp / 1000 / 60) % 60));
+        let seconds = formatNumber(Math.floor((timeStamp / 1000) % 60));
+        pending(`${hours}:${minutes}:${seconds}`);
+        if (timeStamp <= 0) {
+          clearInterval(timer);
+          complete();
+        }
+      };
+      tick();
+      let timer = setInterval(tick, 1000);
+      return timer;
+    }
+  }
+  /**
+   * 跳转/兼容http(s)、本地路由、scheme协议跳转
+   * @param path
+   */
+  public static push(path: string, reg: RegExp = /^(ddou|https?)/) {
+    if (reg.test(path)) {
+      window.location.href = path;
+    } else {
+      history.push(path);
+    }
   }
 }
 export default Utils;
