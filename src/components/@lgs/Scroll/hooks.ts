@@ -10,7 +10,7 @@ import { kPullDownStatus, kPullUpStatus } from './index';
 export function usePullDown(
   fetch: Function,
   isInit = false,
-): [kPullDownStatus, () => void, (status: kPullDownStatus) => void] {
+): [kPullDownStatus, () => void] {
   // status
   let [pullDownStatus, setPullDownStatus] = useState<kPullDownStatus>(
     kPullDownStatus.REFRESH,
@@ -28,13 +28,13 @@ export function usePullDown(
   useEffect(() => {
     isInit && onPullDown();
   }, []);
-  return [pullDownStatus, onPullDown, setPullDownStatus];
+  return [pullDownStatus, onPullDown];
 }
 
 export function usePullUp(
   fetch: Function,
   pullDownStatus: kPullDownStatus,
-): [kPullUpStatus, () => void] {
+): [kPullUpStatus, () => void, (status: kPullUpStatus) => void] {
   let [pullUpStatus, setPullUpStatus] = useState<kPullUpStatus>(
     kPullUpStatus.INITIAL,
   );
@@ -58,5 +58,5 @@ export function usePullUp(
       setPullUpStatus(kPullUpStatus.NO_MORE);
     }
   }, [pullDownStatus]);
-  return [pullUpStatus, onPullUp];
+  return [pullUpStatus, onPullUp, setPullUpStatus];
 }

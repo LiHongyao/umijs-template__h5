@@ -91,7 +91,7 @@ interface IRefs extends IScroll {}
 
 const Scroll = React.forwardRef<IRefs, IProps>((props, ref) => {
   const {
-    height = 500,
+    height = document.querySelector('body')?.getBoundingClientRect().height,
     pullUpStatus,
     pullDownStatus,
     onScroll,
