@@ -50,10 +50,6 @@ html, body, #root, .page  {
 	font-family: PingFang SC;
 }
 
-.page {
-	overflow-y: scroll; 
-}
-
 /*
 //////////////////////////////
 /// 「 默认样式 」           
@@ -706,19 +702,8 @@ input { outline: none; border: none; }
 
 /*
 //////////////////////////////
-/// 「 DDOU____页面公共样式 」           
+/// 「 xxx____页面公共样式 」           
 //////////////////////////////
 */
-.icon__dou {
-	width: 26.59px;
-	height: 27.38px;
-}
-.icon__arrow {
-	width: 6.76px;
-	height: 12.02px;
-}
-.icon__diamond {
-	width: 88px;
-	height: 88px;
-}
+
 
