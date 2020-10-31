@@ -1,21 +1,23 @@
-import React, { memo, useState, useCallback } from 'react'
+import React, { memo, useState, useCallback, CSSProperties } from 'react'
 import Field from '../Field/index'
 import './index.scss'
 
 interface IProps {
-  round?: boolean,
-  placeHolder?: string,
-  backgroundColor?: string,
-  onChange?:(value: string) => void,
-  onSearch?:(value: string) => void
+  value: string;
+  fieldStyle?: CSSProperties;
+  placeHolder?: string;
+  backgroundColor?: string;
+  onChange?:(value: string) => void;
+  onSearch?:(value: string) => void;
  
 }
 const Search: React.FC<IProps> = props => {
   const [keyword, setKeyword] = useState('');
   const { 
-    round = false,
+    value,
     placeHolder = '请输入搜搜关键字',
     backgroundColor = '#FFFFFF',
+    fieldStyle,
     onChange,
     onSearch
    } = props;
@@ -30,7 +32,7 @@ const Search: React.FC<IProps> = props => {
 
   return (
     <div className="lg-search" style={{backgroundColor}}>
-      <Field placeHolder={placeHolder} backgroundColor="#F8F8F8" round={round} onChange={_onChange} />
+      <Field placeHolder={placeHolder} value={value} fieldStyle={fieldStyle}  onChange={_onChange} />
       <section className="lg-search__buttton" onClick={_onSearch}>搜索</section>
     </div>
   )
