@@ -1,8 +1,4 @@
-import React, {
-  memo,
-  FormEvent,
-  CSSProperties,
-} from 'react';
+import React, { memo, FormEvent, CSSProperties } from 'react';
 import './index.less';
 
 interface IProps {
@@ -11,6 +7,9 @@ interface IProps {
   type?: 'text' | 'password' | 'number' | 'tel';
   clear?: boolean;
   disabled?: boolean;
+
+  underline?: boolean;
+  underlineStyle?: CSSProperties;
 
   /* 根节点样式 */
   fieldStyle?: CSSProperties;
@@ -44,7 +43,9 @@ const Field: React.FC<IProps> = props => {
     customCls = '',
     maxLength = Infinity,
     rule = new RegExp(''),
-    disabled = false
+    disabled = false,
+    underline,
+    underlineStyle
   } = props;
 
   const { onChange } = props;
@@ -59,32 +60,35 @@ const Field: React.FC<IProps> = props => {
   };
 
   return (
-    <div className={`lg-field ${customCls}`} style={fieldStyle}>
-      <input
-        className="lg-field__control"
-        placeholder={placeHolder}
-        type={type}
-        value={value}
-        onChange={_onChange}
-        maxLength={maxLength}
-        disabled={disabled}
-        style={{
-          // @ts-ignore
-          '--placeholder-color': placeHolderColor,
-          '--size': fontSize,
-          color,
-          ...controlStyle,
-        }}
-      />
-      {clear && !disabled && String(value).length > 0 && (
-        <img
-          className="lg-field__clear"
-          src={require('./images/icon_clear.png')}
-          onClick={_onClear}
-          alt=""
+    <>
+      <div className={`lg-field ${customCls}`} style={fieldStyle}>
+        <input
+          className="lg-field__control"
+          placeholder={placeHolder}
+          type={type}
+          value={value}
+          onChange={_onChange}
+          maxLength={maxLength}
+          disabled={disabled}
+          style={{
+            // @ts-ignore
+            '--placeholder-color': placeHolderColor,
+            '--size': fontSize,
+            color,
+            ...controlStyle,
+          }}
         />
-      )}
-    </div>
+        {clear && !disabled && String(value).length > 0 && (
+          <img
+            className="lg-field__clear"
+            src={require('./images/icon_clear.png')}
+            onClick={_onClear}
+            alt=""
+          />
+        )}
+      </div>
+      {underline && <div className="lg-field__underline" style={underlineStyle}></div>}
+    </>
   );
 };
 
