@@ -23,6 +23,7 @@
     "@ant-design/pro-layout": "^5.0.12",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.23",
+    "better-scroll": "^2.0.5",
     "cross-env": "^7.0.2",
     "lint-staged": "^10.0.7",
     "postcss-flexbugs-fixes": "^4.2.1",
