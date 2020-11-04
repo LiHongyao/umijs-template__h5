@@ -3,7 +3,7 @@ import './index.less';
 
 interface IProps {
   children: JSX.Element | JSX.Element[]; /** 拖拽元素 */
-  position: [top:number, right: number, bottom: number, left: number]; /** 拖拽元素初始位置：[上, 右, 下, 左] */
+  position: [number, number, number, number]; /** 拖拽元素初始位置：[上, 右, 下, 左] */
   onTap?: () => void /** 点击事件 */
 }
 const DragView: FC<IProps> = props => {
