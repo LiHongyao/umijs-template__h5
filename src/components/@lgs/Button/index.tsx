@@ -3,6 +3,7 @@ import './index.less';
 
 interface IProps {
   text: string | number;
+  icon?: any;
   style?: CSSProperties;
   width?: number;
   height?: number;
@@ -19,10 +20,11 @@ const Button: React.FC<IProps> = props => {
     text,
     round,
     customCls,
-    backgroundColor = '#F82F5C',
+    backgroundColor,
     loading,
     loadingText = '处理中...',
     style,
+    icon,
     onTap,
   } = props;
   // state
@@ -43,7 +45,7 @@ const Button: React.FC<IProps> = props => {
         <>
           <img
             width="30"
-            src={require('./images/loading.png')}
+            src={icon || require('./images/loading.png')}
             className="lg-button__loading"
           />
           <span>{loadingText}</span>
