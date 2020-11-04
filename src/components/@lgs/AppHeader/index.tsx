@@ -6,12 +6,14 @@ import React, {
   memo,
   useImperativeHandle,
   useRef,
+  CSSProperties,
 } from 'react';
 import { history } from 'umi';
 import './index.less';
 
 interface IProps {
   title?: string;
+  titleStyle?: CSSProperties;
   backgroundColor?: string;
   gradientColor?: string;
   theme?: 'dark' | 'light';
@@ -43,6 +45,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
 
   const {
     title = '标题',
+    titleStyle,
     gradientColor,
     backgroundColor = gradientColor
       ? 'transparent'
@@ -143,7 +146,9 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
             {renderLeft && renderLeft()}
           </div>
           {/* 中间标题 */}
-          <div className="app-header__title">{title}</div>
+          <div className="app-header__title" style={titleStyle}>
+            {title}
+          </div>
           {/* 右侧按钮 */}
           <div className="app-header__rightButton">
             {rightButtonText && (

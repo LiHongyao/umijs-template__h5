@@ -91,6 +91,7 @@ interface IRefs extends IScroll {}
 
 const Scroll = React.forwardRef<IRefs, IProps>((props, ref) => {
   const {
+    children,
     height = document.querySelector('body')?.getBoundingClientRect().height,
     pullUpStatus,
     pullDownStatus,
@@ -195,7 +196,7 @@ const Scroll = React.forwardRef<IRefs, IProps>((props, ref) => {
     if (bScroll) {
       bScroll.refresh();
     }
-  }, [bScroll, height]);
+  }, [bScroll, height, children]);
 
   useImperativeHandle(
     ref,

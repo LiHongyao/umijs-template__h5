@@ -1,13 +1,11 @@
-import React, { FC, memo } from 'react'
-import './index.less'
+import React, { FC, memo } from 'react';
+import './index.less';
 interface IProps {
-  visible: boolean
+  visible: boolean;
 }
 const DatePicker: FC<IProps> = props => {
   // props
-  const {
-    visible
-  } = props;
+  const { visible } = props;
 
   // render
   return (
@@ -19,9 +17,7 @@ const DatePicker: FC<IProps> = props => {
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 export default memo(DatePicker);
-

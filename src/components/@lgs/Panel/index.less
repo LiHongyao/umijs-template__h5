@@ -3,7 +3,7 @@
   height: 100%;
   z-index: -1;
   background-color: rgba(0, 0, 0, 0);
-  transition: all .25s linear;
+  transition: all 0.25s linear;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,7 +15,7 @@
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
-    transition: transform .25s  linear;
+    transition: transform 0.25s linear;
     padding: 31px 21px 20px;
     &.round {
       border-radius: 20px 20px 0 0;
@@ -23,12 +23,9 @@
   }
   &.visible {
     z-index: 999;
-    background-color: rgba(0, 0, 0, .75);
+    background-color: rgba(0, 0, 0, 0.75);
   }
   &.visible .lg-panel__contents {
     transform: translateY(0);
   }
- 
 }
-
-

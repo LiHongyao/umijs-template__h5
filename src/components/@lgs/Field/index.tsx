@@ -45,7 +45,7 @@ const Field: React.FC<IProps> = props => {
     rule = new RegExp(''),
     disabled = false,
     underline,
-    underlineStyle
+    underlineStyle,
   } = props;
 
   const { onChange } = props;
@@ -87,7 +87,9 @@ const Field: React.FC<IProps> = props => {
           />
         )}
       </div>
-      {underline && <div className="lg-field__underline" style={underlineStyle}></div>}
+      {underline && (
+        <div className="lg-field__underline" style={underlineStyle}></div>
+      )}
     </>
   );
 };
