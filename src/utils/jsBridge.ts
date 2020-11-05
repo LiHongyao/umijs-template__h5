@@ -5,11 +5,6 @@ declare global {
   interface Window {
     webkit: any;
     js_android: any;
-    // 回调函数
-    topUpCB: Function;
-    inviteCB: Function;
-    bindWeChatCB: Function;
-    buyVipCB: Function;
   }
 }
 

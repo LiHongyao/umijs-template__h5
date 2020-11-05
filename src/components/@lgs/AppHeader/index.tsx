@@ -23,6 +23,7 @@ interface IProps {
 
   renderRight?: () => JSX.Element;
   renderLeft?: () => JSX.Element;
+  renderTitle?: () => JSX.Element;
 
   showBack?: boolean;
   showRefresh?: boolean;
@@ -44,7 +45,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const {
-    title = '标题',
+    title,
     titleStyle,
     gradientColor,
     backgroundColor = gradientColor
@@ -60,6 +61,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
     onRefresh,
     renderRight,
     renderLeft,
+    renderTitle,
   } = props;
 
   useImperativeHandle(ref, () => ({
@@ -148,6 +150,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
           {/* 中间标题 */}
           <div className="app-header__title" style={titleStyle}>
             {title}
+            {renderTitle && renderTitle()}
           </div>
           {/* 右侧按钮 */}
           <div className="app-header__rightButton">

@@ -3,7 +3,7 @@ import { history } from 'umi';
 class Utils {
   // 构造单例
   private static instance: Utils;
-  private constructor() { }
+  private constructor() {}
   static defaultUtils() {
     if (!this.instance) {
       this.instance = new Utils();
@@ -153,15 +153,20 @@ class Utils {
         let seconds = formatNumber(Math.floor((timeStamp / 1000) % 60));
         let res: string | string[];
         if (format) {
-          res = format.replace(/dd/ig, day).replace(/hh/ig, hours).replace(/mm/ig, minutes).replace(/ss/ig, seconds);
+          res = format
+            .replace(/dd/gi, day)
+            .replace(/hh/gi, hours)
+            .replace(/mm/gi, minutes)
+            .replace(/ss/gi, seconds);
         } else {
           res = [day, hours, minutes, seconds];
         }
-        pending(res);
         if (timeStamp <= 0) {
           clearInterval(timer);
           complete();
-        };
+        } else {
+          pending(res);
+        }
       };
       tick();
       let timer = setInterval(tick, 1000);
@@ -190,6 +195,5 @@ class Utils {
       history.replace(path);
     }
   }
-
 }
 export default Utils;

@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, memo } from 'react';
+import React, { CSSProperties, FC, memo, useEffect, useRef } from 'react';
 import './index.less';
 interface IProps {
   visible: boolean;
@@ -19,17 +19,26 @@ const Dialog: FC<IProps> = props => {
     onClose,
   } = props;
 
+  const lgWrapper = useRef<HTMLDivElement | null>(null);
+
   // events
   const onTap = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    event.persist();
     const target = event.target as HTMLDivElement;
     if (mask && target.classList.contains('lg-dialog')) {
       onClose();
     }
   };
+  // effects
+  useEffect(() => {
+    document.body.style.overflow = visible ? 'hidden' : 'auto';
+  }, [visible]);
   // render
   return (
-    <div className={`lg-dialog ${visible ? 'visible' : ''}`} onClick={onTap}>
+    <div
+      ref={lgWrapper}
+      className={`lg-dialog ${visible ? 'visible' : ''}`}
+      onClick={onTap}
+    >
       <div className="lg-dialog__content" style={{ ...customStyle }}>
         {children}
         {showCloseButton && (

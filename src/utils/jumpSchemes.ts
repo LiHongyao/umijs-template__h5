@@ -6,6 +6,9 @@ const SCHEME_SWITCH = `${SCHEME}/switch`;
 const SCHEME_BROWSER = `${SCHEME}/browser`;
 const SCHEME_JUMP = `${SCHEME}/jump`;
 
+// 二级目录地址 ==> “/umi-ddou-h5”
+const PUBLIC_PATH = '';
+
 
 interface PushParams {
   path: string,
@@ -37,25 +40,27 @@ class jumpSchemes {
     if (/^http/.test(path)) {
       url = path;
     } else {
-      url = `${window.location.origin}${path}?needHeader=${needHeader}&appBack=${appBack}`;
+      // 处理测试环境/生产环境二级路由
+      if (process.env.NAME === 'development') {
+        url = `${window.location.origin}${path}?needHeader=${needHeader}&appBack=${appBack}`;
+      } else {
+        url = `${window.location.origin}${PUBLIC_PATH}${path}?needHeader=${needHeader}&appBack=${appBack}`;
+      }
       // 判断是否存在query参数，如果存在，则做拼接处理
       if (query) {
         for (let key in query) {
-          url += `&${key}=${query[key]}`
+          url += `&${key}=${query[key]}`;
         }
-      };
+      }
     }
     // 处理scheme地址
-    let schemeHref = `${SCHEME_PUSH}?url=${encodeURIComponent(url)}`
+    let schemeHref = `${SCHEME_PUSH}?url=${encodeURIComponent(url)}`;
     // 执行跳转
     window.location.href = schemeHref;
   }
   /**
    * 跳转原生页面
    * @param path 
-   * 登录：/login 
-   * 签到：/signIn
-   * 分类：/classify
    */
   public static jump(path: string, params?: Record<string, any>) {
     // 拼接scheme
