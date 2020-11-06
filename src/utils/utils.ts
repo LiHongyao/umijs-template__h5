@@ -174,6 +174,16 @@ class Utils {
     }
   }
   /**
+   * 获取数据类型
+   * @param target
+   */
+  public static toRawType(target: any) {
+    return Object.prototype.toString
+      .call(target)
+      .slice(8, -1)
+      .toLowerCase();
+  }
+  /**
    * 跳转/兼容http(s)、本地路由、scheme协议跳转
    * @param path
    */
