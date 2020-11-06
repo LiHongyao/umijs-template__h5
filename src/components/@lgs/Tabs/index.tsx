@@ -145,11 +145,12 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
       });
       setCursorPos(pos);
     }
-  }, [menuItemsRef, cursorRef]);
+  }, [menuItemsRef.current, cursorRef.current]);
   // => 吸顶
   useEffect(() => {
     let parent: ScrollElement | null = null;
     const onScroll = (e: Event) => {
+      // @ts-ignore
       let scrollTop = +e.target?.scrollTop;
       if (scrollTop > tabsWrapperRef.current!.offsetTop) {
         setIsSticky(true);

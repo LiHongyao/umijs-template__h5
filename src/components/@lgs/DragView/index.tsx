@@ -22,13 +22,10 @@ const DragView: FC<IProps> = props => {
   useEffect(() => {
     if (lgWrapper.current) {
       // 1. 获取屏幕的尺寸信息
-      const clientWidth =
-        document.body.clientWidth || document.documentElement.clientWidth;
-      const clientHeight =
-        document.body.clientHeight || document.documentElement.clientHeight;
+      const clientWidth = window.innerWidth;
+      const clientHeight = window.innerHeight;
       // 2. 获取容器元素的尺寸信息
       const rect = lgWrapper.current.getBoundingClientRect();
-      console.log(lgWrapper.current);
       // 3. 获取用户设置的位置信息
       const [top, right, bottom, left] = props.position;
       setPos({ x: left, y: top });
