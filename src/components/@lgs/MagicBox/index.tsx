@@ -42,7 +42,6 @@ const MagicBox: FC<IProps> = props => {
       let children = props.children as JSX.Element[];
       let columns = children.length < maxColumns ? children.length : maxColumns;
       return children.map((element: JSX.Element, i: number) => {
-        console.log((i + 1) % columns === 0);
         return (
           <section
             className="lg-magic-box__item"
