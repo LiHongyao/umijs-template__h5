@@ -7,7 +7,7 @@
 	from { transform: scale(.85);}
 	to { transform: scale(1);}
 }
-@keyframes ani-move {
+@keyframes ani-move-to-right  {
 	0%, 50% { left: -100%; }
 	100% { left: 100%; }
 }
@@ -16,8 +16,8 @@
 	animation: ani-breathing .6s ease-out alternate infinite;
 }
 /* 高光动画 */
-.ani-move {
-	animation: ani-move 2s ease-out  infinite;
+.ani-move-to-right  {
+	animation: ani-move-to-right  2s ease-out  infinite;
 }
 
 
