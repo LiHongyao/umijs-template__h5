@@ -18,39 +18,51 @@ const DragView: FC<IProps> = props => {
   const [rect, setRect] = useState(() => ({ width: 0, height: 0 }));
   const [offset, setOffset] = useState(() => ({ x: 0, y: 0 }));
   const [pos, setPos] = useState(() => ({ x: 0, y: 0 }));
+
+  // methods
+  const calc = () => {
+    // 1. 获取屏幕的尺寸信息
+    const clientWidth = window.innerWidth;
+    const clientHeight = window.innerHeight;
+    // 2. 获取容器元素的尺寸信息
+    // @ts-ignore
+    const rect = lgWrapper.current.getBoundingClientRect();
+    // 3. 获取用户设置的位置信息
+    const [top, right, bottom, left] = props.position;
+    setPos({ x: left, y: top });
+    if (right) {
+      setPos(prevState => ({
+        ...prevState,
+        x: clientWidth - right - rect.width,
+      }));
+    }
+    if (bottom) {
+      setPos(prevState => ({
+        ...prevState,
+        y: clientHeight - bottom - rect.height,
+      }));
+    }
+    // 4. 记录容器尺寸信息
+    setRect(rect);
+    // 5. 获取拖拽元素在屏幕内可拖拽的边界值
+    setOffset({
+      x: clientWidth - rect.width,
+      y: clientHeight - rect.height,
+    });
+  };
   // effects
   useEffect(() => {
     if (lgWrapper.current) {
-      // 1. 获取屏幕的尺寸信息
-      const clientWidth = window.innerWidth;
-      const clientHeight = window.innerHeight;
-      // 2. 获取容器元素的尺寸信息
-      const rect = lgWrapper.current.getBoundingClientRect();
-      // 3. 获取用户设置的位置信息
-      const [top, right, bottom, left] = props.position;
-      setPos({ x: left, y: top });
-      if (right) {
-        setPos(prevState => ({
-          ...prevState,
-          x: clientWidth - right - rect.width,
-        }));
-      }
-      if (bottom) {
-        setPos(prevState => ({
-          ...prevState,
-          y: clientHeight - bottom - rect.height,
-        }));
-      }
-      // 4. 记录容器尺寸信息
-      setRect(rect);
-      // 5. 获取拖拽元素在屏幕内可拖拽的边界值
-      setOffset({
-        x: clientWidth - rect.width,
-        y: clientHeight - rect.height,
-      });
+      calc();
     }
   }, [lgWrapper]);
 
+  useEffect(() => {
+    window.addEventListener('resize', calc);
+    return () => {
+      window.removeEventListener('resize', calc);
+    };
+  }, []);
   useEffect(() => {
     const onMove = (event: TouchEvent) => {
       // 获取触点，兼容PC和移动端
