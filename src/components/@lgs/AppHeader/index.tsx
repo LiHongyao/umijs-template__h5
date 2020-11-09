@@ -148,7 +148,13 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
             {renderLeft && renderLeft()}
           </div>
           {/* 中间标题 */}
-          <div className="app-header__title" style={titleStyle}>
+          <div
+            className="app-header__title"
+            style={{
+              ...titleStyle,
+              opacity,
+            }}
+          >
             {title}
             {renderTitle && renderTitle()}
           </div>
