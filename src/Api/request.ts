@@ -1,7 +1,7 @@
 import Cookie from '@/utils/cookie';
 import { extend } from "umi-request";
 import { Toast } from 'antd-mobile';
-import { jump } from '@/utils/jumpSchemes';
+import jumpSchemes from '@/utils/jumpSchemes';
 
 const request = extend({
   prefix: process.env.HOST,
@@ -37,7 +37,7 @@ request.interceptors.response.use(async response => {
     case 0:
       return res;
     case -10:
-      jump('/login');
+      jumpSchemes.jump('/login');
       break;
     default:
       Toast.info(res.msg);
