@@ -127,6 +127,9 @@ ul, li { list-style: none;}
 /// 「 icon尺寸 」           
 //////////////////////////////
 */
+.icon-10x10 { width: 10px; height: 10px; }
+.icon-12x12 { width: 12px; height: 12px; }
+.icon-14x14 { width: 14px; height: 14px; }
 .icon-16x16 { width: 16px; height: 16px; }
 
 
