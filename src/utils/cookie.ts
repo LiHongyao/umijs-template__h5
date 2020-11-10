@@ -6,25 +6,30 @@ class Cookie {
    * @param {number} expireDays 过期时间
    */
   public static set(key: string, value: string | number, expireDays = 1) {
-    document.cookie = `${key}=${encodeURIComponent(value)};expires=${expireDays * 24 * 60 * 60 * 1000};path=/;`;
+    document.cookie = `${key}=${encodeURIComponent(
+      value,
+    )};expires=${expireDays * 24 * 60 * 60 * 1000};path=/;`;
   }
   /**
    * 读取cookie
    * @param {string} key 键
    */
-  public static get(key?: string) {
+  public static get<T>(key?: string) {
     if (document.cookie) {
-      const _pairs = document.cookie.split(';');
-      const _result: Record<string, string> = {};
-      _pairs.forEach(str => {
-        let _arr = str.trim().split('=');
-        let _key = String(decodeURIComponent(_arr[0]));
-        let _value = String(decodeURIComponent(_arr[1]));
-        _result[_key] = _value;
+      const pairs = document.cookie.split(';');
+      const result: Record<string, string> = {};
+      pairs.forEach(str => {
+        let arr = str.trim().split('=');
+        let key = String(decodeURIComponent(arr[0]));
+        let value = String(decodeURIComponent(arr[1]));
+        result[key] = value;
       });
-      return key ? (_result[key] ? _result[key] : null) : _result;
+      let res: unknown = key ? (result[key] ? result[key] : '') : result;
+      return res as T;
+    } else {
+      let res: unknown = key ? '' : {};
+      return res as T;
     }
-    return null;
   }
   /**
    * 删除cookie
@@ -41,7 +46,6 @@ class Cookie {
 }
 
 export default Cookie;
-
 
 // Cookie.get();
 // Cookie.get('token');

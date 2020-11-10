@@ -14,8 +14,11 @@ import './index.less';
 interface IProps {
   title?: string;
   titleStyle?: CSSProperties;
+
   backgroundColor?: string;
   gradientColor?: string;
+  fadeInTitle?: boolean /** 该属性需和gradientColor一起使用 */;
+
   theme?: 'dark' | 'light';
   type?: 'APP' | 'H5';
 
@@ -48,6 +51,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
     title,
     titleStyle,
     gradientColor,
+    fadeInTitle,
     backgroundColor = gradientColor
       ? 'transparent'
       : 'linear-gradient(to right, #FFD24D, #FFB80D)',
@@ -152,7 +156,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
             className="app-header__title"
             style={{
               ...titleStyle,
-              opacity,
+              opacity: fadeInTitle ? opacity : 1,
             }}
           >
             {title}
