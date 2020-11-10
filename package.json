@@ -30,6 +30,7 @@
     "cross-env": "^7.0.2",
     "default-passive-events": "^2.0.0",
     "lint-staged": "^10.0.7",
+    "lottie-react-web": "^2.2.2",
     "node-sass": "^4.14.1",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-px-to-viewport": "^1.1.1",
