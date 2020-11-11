@@ -1,5 +1,29 @@
 import { history } from 'umi';
 
+/**
+ * 类型声明
+ *
+ */
+// 全局声明
+declare global {
+  interface Window {
+    _hmt: any;
+  }
+}
+
+// 百度统计
+interface ITrackPv {
+  type: 'pv';
+  pageURL?: string /** 指定要统计PV的页面URL。此项必选，必须是以”/”（斜杠）开头的相对路径 */;
+}
+interface ITrackEs {
+  type: 'es';
+  category: string /** 要监控的目标的类型名称，通常是同一组目标的名字，比如”视频”、”音乐”、”软件”、”游戏”等等。该项必选 */;
+  action?: string /** 用户跟目标交互的行为，如”播放”、”暂停”、”下载”等等。该项必选。 */;
+  opt_label?: string /** 事件的一些额外信息，通常可以是歌曲的名称、软件的名称、链接的名称等等。该项可选。 */;
+  opt_value?: string /** 事件的一些数值信息，比如权重、时长、价格等等，在报表中可以看到其平均值等数据。该项可选。 */;
+}
+
 class Utils {
   // 构造单例
   private static instance: Utils;
@@ -173,6 +197,7 @@ class Utils {
       return timer;
     }
   }
+
   /**
    * 获取数据类型
    * @param target
@@ -183,6 +208,7 @@ class Utils {
       .slice(8, -1)
       .toLowerCase();
   }
+
   /**
    * 跳转/兼容http(s)、本地路由、scheme协议跳转
    * @param path
@@ -203,6 +229,32 @@ class Utils {
       window.location.replace(path);
     } else {
       history.replace(path);
+    }
+  }
+
+  /**
+   * 百度统计
+   * @param options
+   */
+  public static track(options: ITrackPv | ITrackEs) {
+    if (window._hmt) {
+      switch (options.type) {
+        case 'pv':
+          window._hmt.push([
+            '_trackPageview',
+            options.pageURL || location.pathname,
+          ]);
+          break;
+        case 'es':
+          window._hmt.push([
+            '_trackEvent',
+            options.category,
+            options.action || 'click',
+            options.opt_label,
+            options.opt_value,
+          ]);
+          break;
+      }
     }
   }
 }
