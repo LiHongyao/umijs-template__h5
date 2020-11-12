@@ -28,6 +28,7 @@
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.20",
     "cross-env": "^7.0.2",
+    "crypto-js": "^4.0.0",
     "default-passive-events": "^2.0.0",
     "lint-staged": "^10.0.7",
     "lottie-react-web": "^2.2.2",
