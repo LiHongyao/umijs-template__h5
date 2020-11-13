@@ -17,12 +17,15 @@ export default defineConfig({
       .use('file-loader')
       .loader('file-loader');
   },
+  /*
+  // 文件拷贝
   copy: [
     {
       from: './src/public/images',
       to: '/images',
     },
-  ],
+  ],*/
+
   // 支持sass => npm install node-sass
   /*
   sass: {
