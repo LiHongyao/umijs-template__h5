@@ -84,12 +84,12 @@ interface IProps {
   pullDownStatus?: kPullDownStatus;
 }
 
-export interface IScroll {
-  bScroll: BScroll | null;
+export interface IScrollRefs {
+  refresh: () => void /**刷新bScroll */;
+  scrollTo: (x: number, y: number, time?: number) => void /**滚动到指定位置 */;
 }
-interface IRefs extends IScroll {}
 
-const Scroll = React.forwardRef<IRefs, IProps>((props, ref) => {
+const Scroll = React.forwardRef<IScrollRefs, IProps>((props, ref) => {
   const {
     children,
     height = document.querySelector('body')?.getBoundingClientRect().height,
@@ -201,7 +201,12 @@ const Scroll = React.forwardRef<IRefs, IProps>((props, ref) => {
   useImperativeHandle(
     ref,
     () => ({
-      bScroll,
+      refresh: () => {
+        bScroll?.refresh();
+      },
+      scrollTo: (x: number, y: number, time?: number) => {
+        bScroll?.scrollTo(x, y, time);
+      },
     }),
     [bScroll],
   );

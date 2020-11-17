@@ -3,12 +3,13 @@ import './index.less';
 
 interface IProps {
   src: string;
+  alt: string;
   defaultImage?: any;
   customCls?: string;
   style?: CSSProperties;
 }
 const _Image: React.FC<IProps> = props => {
-  const { src, customCls, style, defaultImage } = props;
+  const { src, customCls, style, defaultImage, alt } = props;
   const [innerSrc, setInnerSrc] = useState(defaultImage);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const _Image: React.FC<IProps> = props => {
       className={`lg-image ${customCls || ''}`}
       style={style}
       src={innerSrc}
-      alt=""
+      alt={alt}
     />
   );
 };
