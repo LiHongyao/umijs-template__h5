@@ -1,8 +1,13 @@
 import { defineConfig } from 'umi';
+import routes from '@/routes';
+
 export default defineConfig({
+  // 设置 node_modules 目录下依赖文件的编译方式
   nodeModulesTransform: {
     type: 'none',
   },
+  // 配置别名，对引用路径进行映射
+  alias: {},
   // 构建目录
   outputPath: '/build',
   // 配置是否让生成的文件包含 hash 后缀，通常用于增量发布和避免浏览器加载缓存
@@ -18,7 +23,7 @@ export default defineConfig({
       .loader('file-loader');
   },
   /*
-  // 文件拷贝
+  // 设置要复制到输出目录的文件或文件夹。
   copy: [
     {
       from: './src/public/images',
@@ -32,7 +37,7 @@ export default defineConfig({
     implementation: require('node-sass'),
   },*/
 
-  // 状态管理：dva
+  // 是否启用按需加载
   dva: {},
   // 动态加载loading
   dynamicImport: {
@@ -50,11 +55,8 @@ export default defineConfig({
       mediaQuery: false, // 允许在媒体查询中转换`px`
     }),
   ],
+  // 忽略 moment 的 locale 文件，用于减少尺寸
+  ignoreMomentLocale: true,
   // 路由管理
-  routes: [
-    // 主页
-    { exact: true, path: '/', component: '@/pages/IndexPage' },
-    // 404
-    { path: '*', component: '@/pages/404' },
-  ],
+  routes: routes,
 });
