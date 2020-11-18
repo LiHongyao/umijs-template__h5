@@ -54,7 +54,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
     fadeInTitle,
     backgroundColor = gradientColor
       ? 'transparent'
-      : 'linear-gradient(to right, #FFD24D, #FFB80D)',
+      : 'linear-gradient(90deg, #FFD049 0%, #FFBA11 100%)',
     rightButtonText,
     showBack,
     showRefresh,
@@ -78,6 +78,14 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
   const handleRightButtonTap = () => {
     onRightButtonTap && onRightButtonTap();
   };
+  const handleRefreshButtonTap = () => {
+    if (onRefresh) {
+      onRefresh();
+    } else {
+      window.location.reload();
+    }
+  };
+
   const handleGoBackButtonTap = () => {
     if (onBack) {
       onBack();
@@ -100,11 +108,11 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
   };
   // effects
   useEffect(() => {
-    // window && /iPhone/i.test(window.navigator.userAgent) && window.screen.height >= 812 && window.devicePixelRatio >= 2,
     setIsBangScreen(
       window && window.screen.height >= 812 && window.devicePixelRatio >= 2,
     );
   }, []);
+
   useEffect(() => {
     if (!gradientColor) return;
     window.addEventListener('scroll', handlePageScroll, false);
@@ -120,13 +128,13 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
         <div
           className="app-header__place"
           style={{ height: isBangScreen ? '88px' : '64px' }}
-        ></div>
+        />
       )}
       <div
         className="app-header__wrapper"
         style={{
           background: backgroundColor,
-          color: theme === 'dark' ? '#000000' : '#FFFFFF',
+          color: theme === 'dark' ? '#333333' : '#FFFFFF',
           height: isBangScreen ? '88px' : '64px',
         }}
       >
@@ -179,9 +187,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
                       : require('./images/refresh_btn_light.png')
                   }) no-repeat 100% center`,
                 }}
-                onClick={() => {
-                  onRefresh && onRefresh();
-                }}
+                onClick={handleRefreshButtonTap}
               />
             )}
 
