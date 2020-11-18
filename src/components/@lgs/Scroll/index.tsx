@@ -108,7 +108,6 @@ const Scroll = React.forwardRef<IScrollRefs, IProps>((props, ref) => {
 
   // initialize
   useEffect(() => {
-    console.log('__init_bScroll__');
     const node = lgScrollRef.current;
     if (node) {
       const scroll = new BScroll(node, {
@@ -172,7 +171,6 @@ const Scroll = React.forwardRef<IScrollRefs, IProps>((props, ref) => {
         pullUpStatus === kPullUpStatus.NO_MORE)
     ) {
       let _timer = setTimeout(() => {
-        console.log('___上拉/刷新scroll____');
         bScroll.finishPullUp();
         bScroll.refresh();
         clearTimeout(_timer);
@@ -182,7 +180,6 @@ const Scroll = React.forwardRef<IScrollRefs, IProps>((props, ref) => {
   // 监听 - 下拉状态变化
   useEffect(() => {
     if (bScroll && pullDownStatus === kPullDownStatus.DONE) {
-      console.log('___下拉/刷新scroll____');
       let _timer = setTimeout(() => {
         bScroll.finishPullDown();
         bScroll.refresh();

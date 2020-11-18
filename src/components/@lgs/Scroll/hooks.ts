@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { kPullDownStatus, kPullUpStatus } from './index';
 
 /**
- *
- * @param fetch   // 请求数据的函数
- * @param isInit  // 是否需要首次加载
- * @return [status, eventHandler, changeStatusHandler]
+ * 下拉刷新
+ * @param fetch   请求数据的函数
+ * @param isInit  是否需要首次加载
+ * @return [status, eventHandler]
  */
 export function usePullDown(
   fetch: Function,
@@ -31,6 +31,12 @@ export function usePullDown(
   return [pullDownStatus, onPullDown];
 }
 
+/**
+ * 上拉加载
+ * @param fetch 请求数据的函数
+ * @param pullDownStatus 下拉状态
+ * @return [status, eventHandler, setPullUpStatus]
+ */
 export function usePullUp(
   fetch: Function,
   pullDownStatus: kPullDownStatus,
