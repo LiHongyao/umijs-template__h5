@@ -1,20 +1,19 @@
 import { defineConfig } from 'umi';
-import routes from '@/routes';
 
 export default defineConfig({
-  // 设置 node_modules 目录下依赖文件的编译方式
+  /** 设置 node_modules 目录下依赖文件的编译方式 */
   nodeModulesTransform: {
     type: 'none',
   },
-  // 配置别名，对引用路径进行映射
+  /** 配置别名，对引用路径进行映射 */
   alias: {},
-  // 构建目录
+  /** 构建目录 */
   outputPath: '/build',
-  // 配置是否让生成的文件包含 hash 后缀，通常用于增量发布和避免浏览器加载缓存
+  /** 配置是否让生成的文件包含 hash 后缀，通常用于增量发布和避免浏览器加载缓存 */
   hash: true,
-  // 路由模式
+  /** 路由模式 */
   history: { type: 'browser' },
-  // 自定义字体
+  /** 自定义字体 */
   chainWebpack(config) {
     config.module
       .rule('otf')
@@ -31,19 +30,19 @@ export default defineConfig({
     },
   ],*/
 
-  // 支持sass => npm install node-sass
+  /** 支持sass => npm install node-sass*/
   /*
   sass: {
     implementation: require('node-sass'),
   },*/
 
-  // 是否启用按需加载
+  /** 是否启用按需加载 */
   dva: {},
-  // 动态加载loading
+  /** 动态加载loading */
   dynamicImport: {
     loading: '@/Loading',
   },
-  // 移动端布局适配
+  /** 移动端布局适配 */
   extraPostCSSPlugins: [
     require('postcss-flexbugs-fixes'),
     require('postcss-px-to-viewport')({
@@ -55,8 +54,13 @@ export default defineConfig({
       mediaQuery: false, // 允许在媒体查询中转换`px`
     }),
   ],
-  // 忽略 moment 的 locale 文件，用于减少尺寸
+  /** 忽略 moment 的 locale 文件，用于减少尺寸 */
   ignoreMomentLocale: true,
-  // 路由管理
-  routes: routes,
+  /** 路由管理 */
+  routes: [
+    // 主页
+    { exact: true, path: '/', component: '@/pages/IndexPage' },
+    // 404
+    { path: '*', component: '@/pages/404' },
+  ],
 });
