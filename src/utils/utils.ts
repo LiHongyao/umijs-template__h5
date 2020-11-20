@@ -257,5 +257,63 @@ class Utils {
       }
     }
   }
+  /**
+   * 随机字符
+   * @param length
+   * @param type
+   */
+  public static randomCharacters(
+    length: number,
+    type?: 'default' | 'uppercase' | 'lowercase' | 'digital',
+  ) {
+    type = type || 'default';
+    var bStr = '';
+    switch (type) {
+      case 'digital':
+        bStr += '0123456789';
+        break;
+      case 'uppercase':
+        bStr += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        break;
+      case 'lowercase':
+        bStr += 'abcdefghijklmnopqrstuvwxyz';
+        break;
+      default:
+        bStr += '0123456789';
+        bStr += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        bStr += 'abcdefghijklmnopqrstuvwxyz';
+    }
+    var rStr = '';
+    for (var i = 0; i < length; ++i) {
+      var index = Math.floor(Math.random() * bStr.length);
+      rStr += bStr.slice(index, index + 1);
+    }
+    return rStr;
+  }
+  /**
+   * 获取指定范围内的随机数
+   * @param min
+   * @param max
+   */
+  public static randomDecimals(min: number, max: number) {
+    // 异常处理
+    if (min == undefined || max == undefined || isNaN(min) || isNaN(max)) {
+      return -1;
+    } else {
+      return Math.random() * (max - min) + min;
+    }
+  }
+  /**
+   * 获取指定范围内的随机整数
+   * @param min
+   * @param max
+   */
+  public static randomInteger(min: number, max: number) {
+    if (min == undefined || max == undefined || isNaN(min) || isNaN(max)) {
+      return -1;
+    } else {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  }
 }
 export default Utils;
