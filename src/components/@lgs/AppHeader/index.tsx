@@ -1,3 +1,4 @@
+import jsBridge from '@/utils/jsBridge';
 import Utils from '@/utils/utils';
 import React, {
   useEffect,
@@ -88,6 +89,8 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
   const handleGoBackButtonTap = () => {
     if (onBack) {
       onBack();
+    } else if (Utils.query<string>('appBack') === '1') {
+      jsBridge.goBack();
     } else {
       history.goBack();
     }
