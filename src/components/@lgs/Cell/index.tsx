@@ -12,6 +12,7 @@ interface IProps {
   extra?: string | number /* 右侧内容 */;
   underline?: boolean /* 底部分割线 */;
   isLink?: boolean /* 是否显示右侧链接箭头 */;
+  linkIcon?: any /**自定义link图标 */;
   required?: boolean /* 是否显示必填“*”指示 */;
 
   iconStyle?: CSSProperties;
@@ -34,6 +35,8 @@ interface IProps {
   renderExtra?: () => JSX.Element /* 自定义最右侧内容 */;
   renderValue?: () => JSX.Element /* 自定义value内容 */;
   renderLabel?: () => JSX.Element /* 自定义label内容 */;
+
+  onTap?: () => void;
 }
 const Cell: React.FC<IProps> = props => {
   const {
@@ -46,6 +49,7 @@ const Cell: React.FC<IProps> = props => {
     extra,
     underline,
     isLink,
+    linkIcon,
     required,
     iconStyle,
     cellStyle,
@@ -65,9 +69,16 @@ const Cell: React.FC<IProps> = props => {
     renderExtra,
     renderValue,
     renderLabel,
+    onTap,
   } = props;
   return (
-    <div className={`lg-cell ${customCls || ''}`} style={cellStyle}>
+    <div
+      className={`lg-cell ${customCls || ''}`}
+      style={cellStyle}
+      onClick={() => {
+        onTap && onTap();
+      }}
+    >
       <div className="lg-cell__box">
         {/* 缩略图 */}
         {icon && (
@@ -144,7 +155,7 @@ const Cell: React.FC<IProps> = props => {
       {/* 右侧箭头 */}
       {isLink && (
         <img
-          src={require('./images/icon_arrow_right.png')}
+          src={linkIcon ? linkIcon : require('./images/icon_arrow_right.png')}
           alt=""
           className="lg-cell__link"
         />

@@ -53,6 +53,7 @@ const Field: React.FC<IProps> = props => {
   const _onChange = (event: FormEvent<HTMLInputElement>) => {
     event.persist();
     let value = event.currentTarget.value;
+    console.log(rule.test(value));
     rule.test(value) && onChange(value);
   };
   const _onClear = () => {

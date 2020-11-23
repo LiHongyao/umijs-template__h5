@@ -11,6 +11,10 @@
 	0%, 50% { left: -100%; }
 	100% { left: 100%; }
 }
+@keyframes ani-cursor {
+	0% { opacity: 0;}
+	100% { opacity: 1;}
+}
 /* 呼吸按钮 */
 .ani-breathing {
 	animation: ani-breathing .6s ease-out alternate infinite;
@@ -46,7 +50,7 @@
 html, body, #root, .page  {
 	width: 100%;
 	min-height: 100vh;
-	background-color: #F1F1F1;
+	background-color: #EDEDED;
 	font-family: PingFang SC;
 }
 
@@ -76,11 +80,16 @@ ul, li { list-style: none;}
 /// 「 颜色相关 」           
 //////////////////////////////
 */
+.color-111111 { color: #111111; }
 .color-FFFFFF { color: #FFFFFF; }
 .color-999999 { color: #999999; }
-.color-333333 { color: #333333; }
-.color-666666 { color: #666666; }
 .color-888888 { color: #888888; }
+.color-777777 { color: #777777; }
+.color-666666 { color: #666666; }
+.color-DDDDDD { color: #DDDDDD; }
+.color-333333 { color: #333333; }
+
+
 
 
 .bg-FFFFFF { background-color: #FFFFFF; }
@@ -132,6 +141,10 @@ ul, li { list-style: none;}
 .icon-12x12 { width: 12px; height: 12px; }
 .icon-14x14 { width: 14px; height: 14px; }
 .icon-16x16 { width: 16px; height: 16px; }
+.icon-17x17 { width: 17px; height: 17px; }
+.icon-18x18 { width: 18px; height: 18px; }
+.icon-22x22 { width: 22px; height: 22px; }
+.icon-50x50 { width: 70px; height: 70px; }
 
 
 
@@ -322,9 +335,11 @@ ul, li { list-style: none;}
 .mt-17 { margin-top: 17px; }
 .mt-18 { margin-top: 18px; }
 .mt-19 { margin-top: 19px; }
+.mt-20 { margin-top: 20px; }
 .mt-23 { margin-top: 23px; }
 .mt-24 { margin-top: 24px; }
 .mt-26 { margin-top: 26px; }
+.mt-30 { margin-top: 30px; }
 .mt-31 { margin-top: 31px; }
 .mt-32 { margin-top: 32px; }
 .mt-38 { margin-top: 38px; }
@@ -602,9 +617,10 @@ ul, li { list-style: none;}
 
 /*
 //////////////////////////////
-/// 「 文本对齐方式 」           
+/// 「 文本相关 」           
 //////////////////////////////
 */
+/**文本对齐方式 */
 .text-center   { text-align: center; } 
 .text-right    { text-align: right; }
 .text-left     { text-align: left; }
@@ -612,11 +628,7 @@ ul, li { list-style: none;}
 .text-indent   { text-indent: 2em; }
 
 
-/*
-//////////////////////////////
-/// 「 文本显示行数 」           
-//////////////////////////////
-*/
+/**文本显示行数*/
 .line-clamp-1 {
 	overflow: hidden; 
 	white-space: nowrap; 
@@ -650,6 +662,34 @@ ul, li { list-style: none;}
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 5;
 	overflow: hidden;
+}
+
+/* 文本不可选中 */
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* 自定义光标 */
+.custom-cursor { 
+	position: relative;
+	padding-right: 4px;
+}
+.custom-cursor:after {
+	content: '';
+	animation: ani-cursor .5s linear alternate infinite;
+	display: inline-block;
+	width: 2px;
+	height: 25px;
+	background: #49C265;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
 }
 
 /*
