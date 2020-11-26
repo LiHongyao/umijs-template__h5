@@ -23,6 +23,10 @@
     // fix disabled color in mobile safari
     -webkit-text-fill-color: #a8a8a8;
   }
+  &::-ms-clear {
+    // 去除IE10+浏览器自带的清除按钮
+    display: none;
+  }
 }
 .lg-field__clear {
   width: 13px;

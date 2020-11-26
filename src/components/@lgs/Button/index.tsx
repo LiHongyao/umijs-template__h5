@@ -1,4 +1,4 @@
-import React, { CSSProperties, memo, useState } from 'react';
+import React, { CSSProperties, memo, useEffect, useState } from 'react';
 import './index.less';
 
 interface IProps {
@@ -12,6 +12,7 @@ interface IProps {
   round?: boolean;
   loading?: boolean;
   loadingText?: string;
+  disabled?: boolean;
   onTap?: () => void;
 }
 const Button: React.FC<IProps> = props => {
@@ -25,19 +26,27 @@ const Button: React.FC<IProps> = props => {
     loadingText = '处理中...',
     style,
     icon,
+    disabled,
     onTap,
   } = props;
   // state
+  const [cls, setCls] = useState('');
   // events
   const _onTap = () => {
-    !loading && onTap && onTap();
+    !loading && !disabled && onTap && onTap();
   };
+  // effects
+  useEffect(() => {
+    let _cls = '';
+    round && (_cls += ` round`);
+    customCls && (_cls += ` ${customCls}`);
+    disabled && (_cls += ` disabled`);
+    setCls(_cls);
+  }, []);
 
   return (
     <div
-      className={`lg-button ${round ? 'round' : ''} ${
-        customCls ? customCls : ''
-      }`}
+      className={`lg-button ${cls}`}
       style={{ background: backgroundColor, ...style }}
       onClick={_onTap}
     >

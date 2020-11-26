@@ -1,0 +1,64 @@
+.lg-input {
+  height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+
+  .lg-input__wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    &.__left {
+      justify-content: flex-start;
+    }
+    &.__center {
+      justify-content: center;
+    }
+    &.__right {
+      justify-content: flex-end;
+    }
+  }
+
+  .lg-input__value {
+    display: inline-block;
+    padding-right: 4px;
+    color: #333333;
+  }
+  .lg-input__placeholder {
+    color: #aaaaaa;
+  }
+
+  .lg-input__cursor.__cursor:after {
+    content: '';
+    animation: ani-cursor 0.5s linear alternate infinite;
+    display: inline-block;
+    width: 2px;
+    height: 25px;
+    background: blue;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+  .lg-input__cursor {
+    position: relative;
+    &.__left.__cursor::after {
+      left: 0;
+    }
+    &.__right.__cursor::after {
+      right: 0;
+    }
+    &.__center.__cursor::after {
+      left: calc(50% - 1px);
+    }
+  }
+
+  .lg-input__clear {
+    width: 20px;
+    height: 20px;
+    background: url('./images/icon_clear_btn.png') no-repeat center center;
+    background-size: 14px 14px;
+  }
+}
