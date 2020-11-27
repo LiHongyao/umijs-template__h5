@@ -14,6 +14,7 @@ interface IProps {
   isLink?: boolean /* 是否显示右侧链接箭头 */;
   linkIcon?: any /**自定义link图标 */;
   required?: boolean /* 是否显示必填“*”指示 */;
+  disabled?: boolean /**是否禁用 */;
 
   iconStyle?: CSSProperties;
   cellStyle?: CSSProperties;
@@ -37,6 +38,7 @@ interface IProps {
   renderLabel?: () => JSX.Element /* 自定义label内容 */;
 
   onTap?: () => void;
+  onDisabled?: () => void /**当在禁用状态下点击时 */;
 }
 const Cell: React.FC<IProps> = props => {
   const {
@@ -69,14 +71,18 @@ const Cell: React.FC<IProps> = props => {
     renderExtra,
     renderValue,
     renderLabel,
-    onTap,
   } = props;
+  // render
   return (
     <div
       className={`lg-cell ${customCls || ''}`}
       style={cellStyle}
       onClick={() => {
-        onTap && onTap();
+        if (props.disabled) {
+          props.onDisabled && props.onDisabled();
+        } else {
+          props.onTap && props.onTap();
+        }
       }}
     >
       <div className="lg-cell__box">
@@ -107,7 +113,6 @@ const Cell: React.FC<IProps> = props => {
         )}
 
         {/* 内容 */}
-        {/* @ts-ignore */}
         <div className="lg-cell__contents">
           {/* 自定义内容 */}
           {children && children}
@@ -165,6 +170,9 @@ const Cell: React.FC<IProps> = props => {
       {underline && (
         <div className="lg-cell__underline" style={{ ...underlineStyle }}></div>
       )}
+
+      {/* 禁用 */}
+      {props.disabled && <div className="lg-cell__disabled" />}
     </div>
   );
 };

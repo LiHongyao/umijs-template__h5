@@ -1,0 +1,37 @@
+@keyframes ani-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(-38px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lg-message {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.lg-message__wrapper {
+  margin-bottom: 12px;
+  animation: ani-message-in 0.35s ease-in;
+  transition: all 0.35s ease-out;
+  &.ani-out {
+    transform: translateY(-38px);
+    opacity: 0;
+  }
+}
+.lg-message__item {
+  height: 38px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  color: #ffffff;
+}
