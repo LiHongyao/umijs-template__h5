@@ -1,13 +1,11 @@
-
 import AppHeader from '@/components/@lgs/AppHeader';
-import React, { FC, useState } from 'react';
+
+import React, { FC } from 'react';
 
 const IndexPage: FC = () => {
   return (
     <div className="page">
-      <AppHeader 
-        title="标题栏"
-      />
+      <AppHeader title="标题栏" />
     </div>
   );
 };

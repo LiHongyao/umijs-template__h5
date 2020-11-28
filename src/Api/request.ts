@@ -1,8 +1,8 @@
-import Cookie from '@/utils/cookie';
 import { extend, RequestOptionsInit } from 'umi-request';
 import { Toast } from 'antd-mobile';
 import jumpSchemes from '@/utils/jumpSchemes';
-import Utils from '@/utils/utils';
+import Tools from 'lg-tools';
+import Cookie from 'lg-cookie';
 
 const service = extend({
   prefix: process.env.HOST,
@@ -23,7 +23,7 @@ service.interceptors.request.use((url: string, options: RequestOptionsInit) => {
   if (options.method && /get/i.test(options.method)) {
     options.params = {
       ...options.params,
-      timeState: Utils.randomCharacters(1, 'uppercase') + Date.now(),
+      timeState: Tools.randomCharacters(1, 'uppercase') + Date.now(),
     };
   }
   return {

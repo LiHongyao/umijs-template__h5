@@ -13,7 +13,10 @@ const renderWrap = () => {
   return wrap as HTMLElement;
 };
 
-const info = (options: IConfigs) => {
+const info = (options: IConfigs | string) => {
+  if (typeof options === 'string') {
+    options = { message: options };
+  }
   let wrap = renderWrap();
   let divs = document.createElement('div');
   divs.setAttribute('class', 'lg-message__wrapper');

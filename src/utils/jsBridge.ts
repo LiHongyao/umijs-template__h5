@@ -1,4 +1,4 @@
-import Validator from './validator';
+import Validator from 'lg-validator';
 
 // 定义全局属性/方法
 declare global {
@@ -7,7 +7,6 @@ declare global {
     js_android: any;
   }
 }
-
 
 interface MiniProgramOptions {
   userName: string;
@@ -32,12 +31,13 @@ interface ShareOptions {
   imageBase64?: string;
 }
 
-
 class jsBridge {
   private static call(fnName: string, data?: object) {
     if (Validator.ios()) {
       try {
-        window.webkit.messageHandlers[fnName].postMessage(data ? JSON.stringify(data) : null);
+        window.webkit.messageHandlers[fnName].postMessage(
+          data ? JSON.stringify(data) : null,
+        );
       } catch (err) {
         console.log(err);
       }

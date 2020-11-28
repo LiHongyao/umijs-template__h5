@@ -1,11 +1,7 @@
 .lg-alert {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
+
 .lg-alert__wrapper {
   width: 100vw;
   height: 100vh;
@@ -21,17 +17,68 @@
 }
 
 .lg-alert__content {
-  width: 320px;
+  width: 300px;
   height: 185px;
   background: #ffffff;
   border-radius: 8px;
   text-align: center;
   overflow: hidden;
 }
+
 .lg-alert__box {
   height: ~'calc(100% - 56px)';
   display: flex;
   flex-direction: column;
+  color: #111111;
+}
+
+.lg-alert__icon {
+  padding-top: 16px;
+  flex-shrink: 0;
+  img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+  }
+}
+
+.lg-alert__title {
+  padding: 16px 28px 8px;
+  flex-shrink: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  &.__hasIcon {
+    padding: 0 28px;
+    flex: 1;
+  }
+}
+.lg-alert__message {
+  padding: 8px 25px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: pre-wrap;
+  word-break: break-all;
+
+  // text-overflow: ellipsis;
+  // display: -webkit-box;
+  // -webkit-box-orient: vertical;
+  // -webkit-line-clamp: 2;
+  // overflow: hidden;
+
+  &.__left {
+    text-align: left;
+  }
+  &.__right {
+    text-align: right;
+  }
+  &.__center {
+    text-align: center;
+  }
 }
 
 .lg-alert__button_wrapper {
@@ -41,45 +88,6 @@
   justify-content: center;
   align-items: center;
   font-size: 17px;
-}
-.lg-alert__title {
-  padding: 0 28px;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  color: #111111;
-  font-weight: bold;
-  font-size: 17px;
-  &.__alone {
-    height: 100%;
-  }
-  &.__left {
-    text-align: left;
-  }
-  &.__right {
-    text-align: right;
-  }
-  &.__center {
-    text-align: center;
-  }
-}
-.lg-alert__message {
-  padding: 8px 28px;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &.__left {
-    text-align: left;
-  }
-  &.__right {
-    text-align: right;
-  }
-  &.__center {
-    text-align: center;
-  }
 }
 
 .lg-alert__button {

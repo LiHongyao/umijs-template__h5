@@ -13,54 +13,49 @@ interface IProps {
   loading?: boolean;
   loadingText?: string;
   disabled?: boolean;
-  onTap?: () => void;
+
+  onDisabled?: () => void /**禁用状态时点击 */;
+  onTap?: () => void /**点击按钮 */;
 }
 const Button: React.FC<IProps> = props => {
   // props
-  const {
-    text,
-    round,
-    customCls,
-    backgroundColor,
-    loading,
-    loadingText = '处理中...',
-    style,
-    icon,
-    disabled,
-    onTap,
-  } = props;
+  const { loadingText = '处理中...' } = props;
   // state
   const [cls, setCls] = useState('');
   // events
   const _onTap = () => {
-    !loading && !disabled && onTap && onTap();
+    if (props.disabled) {
+      props.onDisabled && props.onDisabled();
+    } else {
+      !props.loading && props.onTap && props.onTap();
+    }
   };
   // effects
   useEffect(() => {
     let _cls = '';
-    round && (_cls += ` round`);
-    customCls && (_cls += ` ${customCls}`);
-    disabled && (_cls += ` disabled`);
+    props.round && (_cls += ` round`);
+    props.customCls && (_cls += ` ${props.customCls}`);
+    props.disabled && (_cls += ` disabled`);
     setCls(_cls);
-  }, []);
+  }, [props.round, props.customCls, props.disabled]);
 
   return (
     <div
       className={`lg-button ${cls}`}
-      style={{ background: backgroundColor, ...style }}
+      style={{ background: props.backgroundColor, ...props.style }}
       onClick={_onTap}
     >
-      {loading ? (
+      {props.loading ? (
         <>
           <img
             width="30"
-            src={icon || require('./images/loading.png')}
+            src={props.icon || require('./images/loading.png')}
             className="lg-button__loading"
           />
           <span>{loadingText}</span>
         </>
       ) : (
-        <span>{text}</span>
+        <span>{props.text}</span>
       )}
     </div>
   );
