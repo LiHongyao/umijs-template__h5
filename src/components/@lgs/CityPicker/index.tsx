@@ -19,9 +19,12 @@ const CityPicker: FC<IProps> = props => {
 
   // events
   const onClickPosition = (index: number) => {
-    itemListWrapper.current &&
-      (itemListWrapper.current.scrollTop =
-        itemListRef.current[index].offsetTop);
+    let wrapper = itemListWrapper.current;
+    let list = itemListRef.current;
+
+    if (wrapper && list) {
+      wrapper.scrollTop = list[index].offsetTop;
+    }
   };
   // render
   return (

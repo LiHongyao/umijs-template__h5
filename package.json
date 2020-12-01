@@ -31,9 +31,10 @@
     "cross-env": "^7.0.2",
     "crypto-js": "^4.0.0",
     "default-passive-events": "^2.0.0",
-    "lg-big": "^1.0.0",
+    "lg-big": "^1.0.1",
+    "lg-classnames": "^1.0.3",
     "lg-cookie": "^1.0.0",
-    "lg-react-hooks": "^1.0.0",
+    "lg-react-hooks": "^1.0.4",
     "lg-tools": "^1.0.1",
     "lg-validator": "^1.0.0",
     "lint-staged": "^10.0.7",
@@ -44,6 +45,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "umi": "^3.2.20",
+    "vconsole": "^3.3.4",
     "yorkie": "^2.0.0"
   }
 }

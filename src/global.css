@@ -90,9 +90,9 @@ ul, li { list-style: none;}
 .color-333333 { color: #333333; }
 
 
-
-
 .bg-FFFFFF { background-color: #FFFFFF; }
+.bg-F5F5F5 { background-color: #F5F5F5; }
+.bg-F6F6F6 { background-color: #F6F6F6; }
 .bg-EEEEEE { background-color: #EEEEEE; }
 .bg-333333 { background-color: #333333; }
 .bg-000000 { background-color: #000000; }
@@ -140,11 +140,15 @@ ul, li { list-style: none;}
 .icon-11x11 { width: 11px; height: 11px; }
 .icon-12x12 { width: 12px; height: 12px; }
 .icon-14x14 { width: 14px; height: 14px; }
+.icon-15x15 { width: 15px; height: 15px; }
 .icon-16x16 { width: 16px; height: 16px; }
 .icon-17x17 { width: 17px; height: 17px; }
 .icon-18x18 { width: 18px; height: 18px; }
+.icon-20x20 { width: 20px; height: 20px; }
 .icon-22x22 { width: 22px; height: 22px; }
+.icon-24x24 { width: 24px; height: 24px; }
 .icon-36x36 { width: 36px; height: 36px; }
+.icon-52x52 { width: 52px; height: 52px; }
 .icon-56x56 { width: 56px; height: 56px; }
 .icon-70x70 { width: 70px; height: 70px; }
 
@@ -155,12 +159,14 @@ ul, li { list-style: none;}
 /// 「 弹性布局 」           
 //////////////////////////////
 */
+
 .flex-1 { flex: 1; }
 .flex-wrap {flex-wrap: wrap;}
 .flex-center { display: flex; justify-content: center; align-items: center; }
 .flex-v-center { display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .flex-vertical { flex-direction: column; }
 .flex-horizontal { flex-direction: row; }
+.flex-shrink { flex-shrink: 0; }
 
 .justify-content-start { justify-content: flex-start; }
 .justify-content-end { justify-content: flex-end; }
@@ -424,6 +430,12 @@ ul, li { list-style: none;}
 */
 .f-bold { font-weight: bold; } 
 .f-lighter { font-weight: lighter;}
+.f-100 { font-weight: 100; }
+.f-200 { font-weight: 200; }
+.f-300 { font-weight: 300; }
+.f-400 { font-weight: 400; }
+.f-500 { font-weight: 500; }
+.f-600 { font-weight: 600; }
 
 .f8  { font-size:  8px; }
 .f9  { font-size:  9px; }
@@ -458,14 +470,16 @@ ul, li { list-style: none;}
 */
 .ls-1 { letter-spacing: 1px;}
 .ls-2 { letter-spacing: 2px;}
+.ls-3 { letter-spacing: 3px;}
 
 /*
 //////////////////////////////
 /// 「 圆角 」           
 //////////////////////////////
 */
-.rounded-4  { border-radius: 4px; }
+
 .rounded-2  { border-radius: 2px; }
+.rounded-4  { border-radius: 4px; }
 .rounded-6  { border-radius: 6px; }
 .rounded-8  { border-radius: 8px; }
 .rounded-9  { border-radius: 9px; }
@@ -473,7 +487,9 @@ ul, li { list-style: none;}
 .rounded-12 { border-radius: 12px;}
 .rounded-13 { border-radius: 13px;}
 .rounded-14 { border-radius: 14px;}
+.rounded-16 { border-radius: 16px;}
 .rounded-18 { border-radius: 18px;}
+.rounded-20 { border-radius: 20px;}
 .rounded-22 { border-radius: 22px;}
 .rounded-24 { border-radius: 24px;}
 .rounded-25 { border-radius: 25px;}
@@ -606,13 +622,12 @@ ul, li { list-style: none;}
 .border-light { border-color: #FFFFFF; }
 .border-dark  { border-color: #000000; }
 
-.border-FF7E26 { border-color: #FF7E26; }
 .border-F1F1F1 { border-color: #F1F1F1; }
 .border-DBDBDB { border-color: #DBDBDB; } 
 .border-E5E5E5 { border-color: #E5E5E5; }
 .border-B9B9B9 { border-color: #B9B9B9; }
-.border-F1D39A { border-color: #F1D39A; }
-.border-BD6E3C { border-color: #BD6E3C; }
+.border-F0F0F0 { border-color: #F0F0F0; }
+.border-E1E6F5 { border-color: #E1E6F5; }
 
 
 
@@ -676,23 +691,6 @@ ul, li { list-style: none;}
 	user-select: none;
 }
 
-/* 自定义光标 */
-.custom-cursor { 
-	position: relative;
-	padding-right: 4px;
-}
-.custom-cursor:after {
-	content: '';
-	animation: ani-cursor .5s linear alternate infinite;
-	display: inline-block;
-	width: 2px;
-	height: 25px;
-	background: #49C265;
-	position: absolute;
-	top: 50%;
-	right: 0;
-	transform: translateY(-50%);
-}
 
 /*
 //////////////////////////////
@@ -702,8 +700,6 @@ ul, li { list-style: none;}
 
 .under-line { text-decoration: underline; }
 .line-through { text-decoration: line-through; }
-
-
 
 /*
 //////////////////////////////
@@ -740,17 +736,8 @@ ul, li { list-style: none;}
 }
 
 
-.rich-html * {
-  max-width: 100% !important;
-}
 
-.rich-html img {
-  height: auto !important;
-}
 
-.shrink {
-	flex-shrink: 0;
-}
 
 
 /* 加载动画 */

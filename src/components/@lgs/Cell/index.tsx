@@ -75,7 +75,9 @@ const Cell: React.FC<IProps> = props => {
   // render
   return (
     <div
-      className={`lg-cell ${customCls || ''}`}
+      className={`lg-cell ${customCls ? customCls : ''} ${
+        props.disabled ? 'disabled' : ''
+      }`}
       style={cellStyle}
       onClick={() => {
         if (props.disabled) {
@@ -99,7 +101,7 @@ const Cell: React.FC<IProps> = props => {
         {/* 标题 */}
         {title && !icon && (
           <div
-            className={`lg-cell__title ${titleCls || ''} ${
+            className={`lg-cell__title ${titleCls ? titleCls : ''} ${
               required ? 'required' : ''
             }`}
             style={{ ...titleStyle }}
@@ -119,7 +121,7 @@ const Cell: React.FC<IProps> = props => {
           {/* sub */}
           {subTitle && (
             <section
-              className={`lg-cell__sub_title ${subTitleCls || ''}`}
+              className={`lg-cell__sub_title ${subTitleCls ? subTitleCls : ''}`}
               style={subTitleStyle}
             >
               {subTitle}
@@ -128,7 +130,7 @@ const Cell: React.FC<IProps> = props => {
           {/* 内容 */}
           {(value || renderValue) && (
             <section
-              className={`lg-cell__value ${valueCls || ''}`}
+              className={`lg-cell__value ${valueCls ? valueCls : ''}`}
               style={valueStyle}
             >
               {value}
@@ -139,7 +141,7 @@ const Cell: React.FC<IProps> = props => {
           {/* 描述信息 */}
           {(label || renderLabel) && (
             <section
-              className={`lg-cell__label ${labelCls || ''}`}
+              className={`lg-cell__label ${labelCls ? labelCls : ''}`}
               style={labelStyle}
             >
               {label}
@@ -151,7 +153,10 @@ const Cell: React.FC<IProps> = props => {
 
       {/* 最右侧内容 */}
       {(extra || renderExtra) && (
-        <div className={`lg-cell__extra ${extraCls || ''}`} style={extraStyle}>
+        <div
+          className={`lg-cell__extra ${extraCls ? extraCls : ''}`}
+          style={extraStyle}
+        >
           {extra}
           {renderExtra && renderExtra()}
         </div>
@@ -170,9 +175,6 @@ const Cell: React.FC<IProps> = props => {
       {underline && (
         <div className="lg-cell__underline" style={{ ...underlineStyle }}></div>
       )}
-
-      {/* 禁用 */}
-      {props.disabled && <div className="lg-cell__disabled" />}
     </div>
   );
 };

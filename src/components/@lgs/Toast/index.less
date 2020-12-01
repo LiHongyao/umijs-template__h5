@@ -1,0 +1,46 @@
+@keyframes ani-loading {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(-360deg);
+  }
+}
+
+.lg-toast__wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.lg-toast__content {
+  max-width: 70%;
+  padding: 4px 20px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 1px;
+  &.loading {
+    padding: 4px 30px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    & .lg-toast__tips {
+      margin-top: 10px;
+    }
+  }
+}
+
+.lg-toast__loading {
+  width: 40px;
+  height: 40px;
+  animation: ani-loading 1s linear infinite;
+}

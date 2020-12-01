@@ -1,17 +1,3 @@
-# # 前言
-
-为提升前端开发效率，减少不必要的配置项目环境的时间，特开发 `lg-umijs-cli` 脚手架供产研中心前端组的小伙伴使用。框架模板基于umijs + typescript 实现，内置常用的工具函数、api请求、dva、移动端适配、H5与原生交互、全局样式等功能。下面例举框架技术栈的一些参照地址，仅供参考：
-
-- react：https://react.docschina.org/
-
-- react/typescript 中文手册：https://typescript.bootcss.com/tutorials/react.html
-
-- Ant-design：https://ant.design/index-cn
-- Ant-mobile：https://mobile.ant.design/index-cn
-
-- umijs：https://umijs.org/zh-CN
-- Better-scroll：https://better-scroll.github.io/docs/zh-CN/guide/
-
 # # 目录结构
 
 ```
@@ -24,9 +10,9 @@
     ├── assets      # 静态资源
     ├── components  # 公共组件（页面级/项目级公共组件）
     		├── @lgs    # 公共组件（项目级）
+        ├── ...     # 其他组件（页面级）
     ├── constants
     		├── interface.d.ts # 全局TS类型定义
-    ├── hooks       # 自定义hooks
     ├── models      # dva 
     ├── pages       # 路由组件
 		    ├── IndexPage     # 页面
@@ -34,18 +20,17 @@
         	 ├── images     # 页面级图片资源
            ├── index.less # 页面级样式（推荐使用less）
            └── index.tsx  # 页面级逻辑部分 
-        └── 404           # 404页面
+        ├── 404           # 404页面
+        └── document.ejs  # Html模板文件/可以引入百度统计或者CDN引入等操作
     ├── public            # 此目录下所有文件会被 copy 到输出路径
     ├── utils # 工具类
-        ├── cookie.ts       # cookie 操作相关
-        ├── jsBridge.ts     # H5 原生通信相关
-        ├── jumpSchemes.ts  # H5 原生跳转协议相关
-        ├── lgNumber.ts     # 数值运算库（解决js计算精度丢失问题）
-        ├── utils.ts        # 工具函数相关
+        ├── secret.ts       # 加密解密相关
         └── validator.ts    # 正则验证相关
+    ├── app.ts              # 运行时配置文件，可以在这里扩展运行时的能力，比如修改路由、修改 render 方法等
     ├── global.css          # 全局样式文件
     ├── global.ts           # 全局脚本部分
-    └── app.ts              # 运行时配置文件，可以在这里扩展运行时的能力，比如修改路由、修改 render 方法等
+    └── Loading.tsx         # 页面加载Loading
+├── .env            # 配置文件（端口配置）
 ├── .umirc.dev.ts   # 配置文件（开发环境）
 ├── .umirc.prod.ts  # 配置文件（生产环境）
 ├── .umirc.test.ts  # 配置文件（测试环境）
@@ -88,6 +73,16 @@
   // 提示：memo 用于组件，如果是页面级组件，则无需使用memo包裹。
   export default memo(Test);
   ````
+# # 公共库，项目已安装
+
+- [lg-big：处理js浮点数计算精度问题](https://github.com/lihongyao/lg-big)
+- [lg-classnames：class类名处理](https://github.com/lihongyao/lg-classnames)
+- [lg-cookie：操作cookie](https://github.com/lihongyao/lg-cookie)
+- [lg-react-hooks：常用react-hooks合集](https://github.com/lihongyao/lg-react-hooks)
+- [lg-tools：工具函数](https://github.com/lihongyao/lg-tools)
+- [lg-validator：正则验证工具](https://github.com/lihongyao/lg-validator)
+
+> 提示：以上工具库部分没有写使用指南，对于一些方法的时候，可以cmd 后者 ctr + 鼠标点击查看声明文件
 
 # # 原生交互
 

@@ -1,4 +1,5 @@
-import React, { CSSProperties, memo, useEffect, useState } from 'react';
+import classNames from 'lg-classnames';
+import React, { CSSProperties, memo, useState } from 'react';
 import './index.less';
 
 interface IProps {
@@ -20,8 +21,6 @@ interface IProps {
 const Button: React.FC<IProps> = props => {
   // props
   const { loadingText = '处理中...' } = props;
-  // state
-  const [cls, setCls] = useState('');
   // events
   const _onTap = () => {
     if (props.disabled) {
@@ -30,18 +29,16 @@ const Button: React.FC<IProps> = props => {
       !props.loading && props.onTap && props.onTap();
     }
   };
-  // effects
-  useEffect(() => {
-    let _cls = '';
-    props.round && (_cls += ` round`);
-    props.customCls && (_cls += ` ${props.customCls}`);
-    props.disabled && (_cls += ` disabled`);
-    setCls(_cls);
-  }, [props.round, props.customCls, props.disabled]);
-
   return (
     <div
-      className={`lg-button ${cls}`}
+      className={classNames([
+        'lg-button',
+        props.customCls,
+        {
+          round: props.round,
+          disabled: props.disabled,
+        },
+      ])}
       style={{ background: props.backgroundColor, ...props.style }}
       onClick={_onTap}
     >

@@ -20,9 +20,10 @@ export function usePullDown(
     setPullDownStatus(kPullDownStatus.LOADING);
     fetch().then((status: kPullDownStatus) => {
       setPullDownStatus(kPullDownStatus.DONE);
+      setPullDownStatus(status);
       setTimeout(() => {
-        setPullDownStatus(status);
-      }, 0);
+        setPullDownStatus(kPullDownStatus.REFRESH);
+      }, 500);
     });
   };
   useEffect(() => {

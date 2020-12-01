@@ -105,7 +105,7 @@ const Alert: FC<IProps> = props => {
 function info(options: IOptions | string) {
   // 判断数据类型
   if (typeof options === 'string') {
-    options = { message: options, icon: true };
+    options = { message: options };
   }
   // 构造容器
   let wrap = document.querySelector('.lg-alert');

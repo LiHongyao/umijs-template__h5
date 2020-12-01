@@ -35,6 +35,9 @@ const Keyboard: FC = () => {
   };
 
   useEffect(() => {
+    document.body.style.overflow = visible ? 'hidden' : 'auto';
+  }, [visible]);
+  useEffect(() => {
     const handler = (event: Event) => {
       // document事件触发时过滤指定元素（阻止键盘收起）
       let tar = event.target as HTMLElement;
