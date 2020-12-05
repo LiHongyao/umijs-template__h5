@@ -5,10 +5,8 @@ import './index.less';
 interface IProps {
   visible: boolean;
   anchorStyle?: CSSProperties;
-
   onClose: () => void;
   onChange: (city: string) => void;
-
   renderTitle?: () => JSX.Element | JSX.Element[];
 }
 

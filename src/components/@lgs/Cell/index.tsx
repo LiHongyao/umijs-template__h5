@@ -1,3 +1,4 @@
+import classNames from 'lg-classnames';
 import React, { CSSProperties, memo } from 'react';
 import './index.less';
 
@@ -52,7 +53,6 @@ const Cell: React.FC<IProps> = props => {
     underline,
     isLink,
     linkIcon,
-    required,
     iconStyle,
     cellStyle,
     titleStyle,
@@ -61,13 +61,6 @@ const Cell: React.FC<IProps> = props => {
     underlineStyle,
     labelStyle,
     extraStyle,
-    titleCls,
-    subTitleCls,
-    customCls,
-    valueCls,
-    iconCls,
-    labelCls,
-    extraCls,
     renderExtra,
     renderValue,
     renderLabel,
@@ -75,9 +68,11 @@ const Cell: React.FC<IProps> = props => {
   // render
   return (
     <div
-      className={`lg-cell ${customCls ? customCls : ''} ${
-        props.disabled ? 'disabled' : ''
-      }`}
+      className={classNames([
+        'lg-cell',
+        props.customCls,
+        { disabled: !!props.disabled },
+      ])}
       style={cellStyle}
       onClick={() => {
         if (props.disabled) {
@@ -91,7 +86,7 @@ const Cell: React.FC<IProps> = props => {
         {/* 缩略图 */}
         {icon && (
           <div
-            className={`lg-cell__icon ${iconCls}`}
+            className={classNames(['lg-cell__icon', props.iconCls])}
             style={{
               background: `url(${icon}) no-repeat center center / cover`,
               ...iconStyle,
@@ -101,9 +96,11 @@ const Cell: React.FC<IProps> = props => {
         {/* 标题 */}
         {title && !icon && (
           <div
-            className={`lg-cell__title ${titleCls ? titleCls : ''} ${
-              required ? 'required' : ''
-            }`}
+            className={classNames([
+              'lg-cell__title',
+              props.titleCls,
+              { required: !!props.required },
+            ])}
             style={{ ...titleStyle }}
           >
             {String(title)
@@ -121,7 +118,7 @@ const Cell: React.FC<IProps> = props => {
           {/* sub */}
           {subTitle && (
             <section
-              className={`lg-cell__sub_title ${subTitleCls ? subTitleCls : ''}`}
+              className={classNames(['lg-cell__sub_title', props.subTitleCls])}
               style={subTitleStyle}
             >
               {subTitle}
@@ -130,7 +127,7 @@ const Cell: React.FC<IProps> = props => {
           {/* 内容 */}
           {(value || renderValue) && (
             <section
-              className={`lg-cell__value ${valueCls ? valueCls : ''}`}
+              className={classNames(['lg-cell__value', props.valueCls])}
               style={valueStyle}
             >
               {value}
@@ -141,7 +138,7 @@ const Cell: React.FC<IProps> = props => {
           {/* 描述信息 */}
           {(label || renderLabel) && (
             <section
-              className={`lg-cell__label ${labelCls ? labelCls : ''}`}
+              className={classNames(['lg-cell__label', props.labelCls])}
               style={labelStyle}
             >
               {label}
@@ -154,7 +151,7 @@ const Cell: React.FC<IProps> = props => {
       {/* 最右侧内容 */}
       {(extra || renderExtra) && (
         <div
-          className={`lg-cell__extra ${extraCls ? extraCls : ''}`}
+          className={classNames(['lg-cell__extra', props.extraCls])}
           style={extraStyle}
         >
           {extra}

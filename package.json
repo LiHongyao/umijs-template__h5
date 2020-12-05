@@ -4,7 +4,7 @@
     "start": "cross-env UMI_ENV=dev umi dev",
     "build": "cross-env UMI_ENV=prod umi build",
     "test": "cross-env UMI_ENV=test umi build",
-    "update-lg": "yarn add lg-tools@latest lg-validator@latest lg-cookie@latest lg-react-hooks@latest lg-classnames@latest lg-big@latest",
+    "update-lg": "yarn add lg-tools@latest lg-validator@latest lg-cookie@latest lg-react-hooks@latest lg-classnames@latest lg-big@latest lg-schemes@latest",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test:coverage": "umi-test --coverage"
@@ -36,7 +36,7 @@
     "lg-classnames": "^1.0.3",
     "lg-cookie": "^1.0.1",
     "lg-react-hooks": "^1.0.4",
-    "lg-schemes": "^1.0.0",
+    "lg-schemes": "^1.0.1",
     "lg-tools": "^1.0.1",
     "lg-validator": "^1.0.0",
     "lint-staged": "^10.0.7",

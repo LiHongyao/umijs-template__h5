@@ -81,26 +81,6 @@
 - [lg-react-hooks：常用react-hooks合集](https://github.com/lihongyao/lg-react-hooks)
 - [lg-tools：工具函数](https://github.com/lihongyao/lg-tools)
 - [lg-validator：正则验证工具](https://github.com/lihongyao/lg-validator)
-- [lg-scheme：H5/原生跳转协议](https://github.com/LiHongyao/lg-schemes)
+- [lg-schemes：H5/原生跳转协议](https://github.com/LiHongyao/lg-schemes)
 
 > 提示：以上工具库部分没有写使用指南，对于一些方法的时候，可以cmd 后者 ctr + 鼠标点击查看声明文件
-
-# # 原生交互
-
-## 1. jsBridge
-
-开发中，我们经常会通过方法和原生进行通信，比如分享、调用支付等等，这里例出js调用Android和iOS的示例代码：
-
-```js
-// js调用iOS
-window.webkit.messageHandlers[fnName].postMessage(params ? JSON.stringify(params) : null);
-// js调用Android
-window.js_android[fnName](params ? JSON.stringify(params) : null);
-```
-
-> 说明：
->
-> - `js_android` 为安卓开发者定义，为保持统一，安卓开发者将所有js调用方法定义在js_android对象上
-> - `params` 为调用原生方法时传递的参数，对象类型（便于扩展和兼容），当无参数时传递 `null`。如果有参数，需转换为 JSON 字符串传递。
-
-> 提示：和原生通信的方法，H5框架已封装，详情参考目录结构：“@/utils/jsBridge.ts”。

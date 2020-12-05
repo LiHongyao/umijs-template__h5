@@ -1,47 +1,51 @@
+import classNames from 'lg-classnames';
 import React, { FC, memo, useEffect, useState } from 'react';
 import './index.less';
 
-export interface IDataModel {
+export interface IAddressPickerModel {
   code: string;
   fullName: string;
 }
-export interface IData {
-  province: IDataModel;
-  city: IDataModel;
-  area: IDataModel;
+export interface IAddressPickerData {
+  province: IAddressPickerModel;
+  city: IAddressPickerModel;
+  area: IAddressPickerModel;
 }
 
-type KeyType = keyof IData;
+type KeyType = keyof IAddressPickerData;
 
 interface IProps {
-  visible: boolean;
-  data: IData;
-  onFetch: (code: string) => Promise<any>;
-  onSure: (data: IData) => void;
-  onClose: () => void;
+  visible: boolean /** 是否显示 */;
+  data?: IAddressPickerData | null /** 默认值 */;
+  onFetch: (code: string) => Promise<any> /** 匹配数据源 */;
+  onSure: (data: IAddressPickerData) => void /** 确认 */;
+  onClose: () => void /** 关闭 */;
 }
 
 const AddressPicker: FC<IProps> = props => {
-  // props
-  const {
-    visible,
-    data = {
-      province: { code: '', fullName: '' },
-      city: { code: '', fullName: '' },
-      area: { code: '', fullName: '' },
-    },
-    onFetch,
-    onSure,
-    onClose,
-  } = props;
-
   // state
-  const [selectedKey, setSelectedKey] = useState<KeyType>('province');
-  const [items, setItems] = useState<IDataModel[]>([] as IDataModel[]);
-  const [innerData, setInnerData] = useState(data);
+  const [selectedKey, setSelectedKey] = useState<KeyType>(
+    'province',
+  ); /** 选中字段标识 */
+  const [items, setItems] = useState<IAddressPickerModel[]>(
+    [] as IAddressPickerModel[],
+  ); /** 列表数据 */
+  const [innerData, setInnerData] = useState<IAddressPickerData>(() => {
+    if (props.data) {
+      return props.data;
+    } else {
+      return {
+        province: { code: '', fullName: '' },
+        city: { code: '', fullName: '' },
+        area: { code: '', fullName: '' },
+      };
+    }
+  }); /** 内部选中数据 */
 
+  // methods
+  /** 获取数据 */
   const getData = (code: string) => {
-    onFetch(code).then((items: IDataModel[]) => {
+    props.onFetch(code).then((items: IAddressPickerModel[]) => {
       setItems(items);
     });
   };
@@ -74,7 +78,7 @@ const AddressPicker: FC<IProps> = props => {
     getData(code);
   };
 
-  const onItemTap = (item: IDataModel) => {
+  const onItemTap = (item: IAddressPickerModel) => {
     setInnerData(prev => ({
       ...prev,
       [selectedKey]: { ...item },
@@ -91,12 +95,12 @@ const AddressPicker: FC<IProps> = props => {
     }
   };
   const onInnerSure = () => {
-    onSure({
+    props.onSure({
       province: { ...innerData.province },
       city: { ...innerData.city },
       area: { ...innerData.area },
     });
-    onClose();
+    props.onClose();
   };
   // effects
   useEffect(() => {
@@ -107,7 +111,12 @@ const AddressPicker: FC<IProps> = props => {
 
   // render
   return (
-    <div className={`lg-address-picker ${visible ? 'visible' : ''}`}>
+    <div
+      className={classNames([
+        'lg-address-picker',
+        { visible: !!props.visible },
+      ])}
+    >
       <div className="lg-address-picker__contents">
         {/* 标题 */}
         <h3 className="lg-address-picker__title">已选择</h3>
@@ -115,9 +124,10 @@ const AddressPicker: FC<IProps> = props => {
         <div className="lg-address-picker__res">
           {/* 省 */}
           <section
-            className={`lg-address-picker__res_item ${
-              innerData.province.code ? 'selected' : ''
-            }`}
+            className={classNames([
+              'lg-address-picker__res_item',
+              { selected: !!innerData.province.code },
+            ])}
             onClick={() => {
               onTap('province');
             }}
@@ -127,9 +137,10 @@ const AddressPicker: FC<IProps> = props => {
           {/* 市 */}
           {innerData.province.fullName && (
             <section
-              className={`lg-address-picker__res_item ${
-                innerData.city.code ? 'selected' : ''
-              }`}
+              className={classNames([
+                'lg-address-picker__res_item',
+                { selected: !!innerData.city.code },
+              ])}
               onClick={() => {
                 onTap('city');
               }}
@@ -140,9 +151,10 @@ const AddressPicker: FC<IProps> = props => {
           {/* 区 */}
           {innerData.province.fullName && innerData.city.fullName && (
             <section
-              className={`lg-address-picker__res_item ${
-                innerData.area.code ? 'selected' : ''
-              }`}
+              className={classNames([
+                'lg-address-picker__res_item',
+                { selected: !!innerData.area.code },
+              ])}
               onClick={() => {
                 onTap('area');
               }}
@@ -169,7 +181,7 @@ const AddressPicker: FC<IProps> = props => {
           确认
         </div>
         {/* 关闭按钮 */}
-        <div className="lg-address-picker__close_btn" onClick={onClose} />
+        <div className="lg-address-picker__close_btn" onClick={props.onClose} />
       </div>
     </div>
   );
