@@ -10,14 +10,14 @@ interface Iprops {
 }
 
 const PullRefresh: FC<Iprops> = props => {
-  let {
+  const {
     color = '#999999',
     status = kPullDownStatus.REFRESH,
     height = '80px',
   } = props;
 
-  const statusText = (status: kPullDownStatus) => {
-    switch (status) {
+  const statusText = (_status: kPullDownStatus) => {
+    switch (_status) {
       case kPullDownStatus.REFRESH:
         return '下拉刷新数据';
       case kPullDownStatus.LOADING:

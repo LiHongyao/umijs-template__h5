@@ -1,4 +1,5 @@
-import Utils from '@/utils/utils';
+import jsBridge from 'lg-js-bridge';
+import Tools from 'lg-tools';
 import React, {
   useEffect,
   useState,
@@ -7,7 +8,7 @@ import React, {
   useRef,
   CSSProperties,
 } from 'react';
-import { history } from 'umi';
+
 import './index.less';
 
 interface IProps {
@@ -75,7 +76,7 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
 
   // events
   const handleRightButtonTap = () => {
-    onRightButtonTap && onRightButtonTap();
+    if (onRightButtonTap) onRightButtonTap();
   };
   const handleRefreshButtonTap = () => {
     if (onRefresh) {
@@ -86,17 +87,19 @@ const AppHeader = React.forwardRef<IRefs, IProps>((props, ref) => {
   };
 
   const handleGoBackButtonTap = () => {
-    if (onBack) {
+    if (Tools.query<string>('appBack') === '1') {
+      jsBridge.nativeBack();
+    } else if (onBack) {
       onBack();
     } else {
-      history.goBack();
+      history.back();
     }
   };
   const handlePageScroll = (ev: Event) => {
     ev = ev || window.event;
-    let scrollTop =
+    const scrollTop =
       document.body.scrollTop || document.documentElement.scrollTop;
-    let target = 100;
+    const target = 100;
     if (scrollTop < target) {
       setOpacity(scrollTop / target);
     } else {

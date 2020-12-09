@@ -1,11 +1,4 @@
-import React, {
-  CSSProperties,
-  forwardRef,
-  memo,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { CSSProperties, memo, useEffect, useRef, useState } from 'react';
 import './index.less';
 
 export interface TabsItem {
@@ -29,9 +22,8 @@ interface IProps {
   onChange: (index: number) => void;
 }
 type ScrollElement = HTMLElement | Window;
-interface IRefs {}
 
-const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
+const Tabs = (props: IProps) => {
   const {
     menus,
     current = 0,
@@ -90,10 +82,10 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
   const onMenuItemTap = (index: number) => {
     if (current === index) return;
     onChange(index);
-    let dom = menuItemsRef.current[index];
-    let itemLeft = dom.offsetLeft;
-    let itemHalf = dom.offsetWidth / 2;
-    let menuHalf = menuRef.current!.offsetWidth / 2;
+    const dom = menuItemsRef.current[index];
+    const itemLeft = dom.offsetLeft;
+    const itemHalf = dom.offsetWidth / 2;
+    const menuHalf = menuRef.current!.offsetWidth / 2;
     let target = itemLeft - menuHalf + itemHalf;
     if (target < 0) {
       target = 0;
@@ -107,11 +99,11 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
     }
     // 帧动画
 
-    let minus = target - menuRef.current!.scrollLeft;
-    let duration = 250;
-    let interval = 12;
-    let speed = minus / (duration / interval);
-    let timer = setInterval(() => {
+    const minus = target - menuRef.current!.scrollLeft;
+    const duration = 250;
+    const interval = 12;
+    const speed = minus / (duration / interval);
+    const timer = setInterval(() => {
       menuRef.current!.scrollLeft += speed;
       if (
         Math.abs(target - menuRef.current!.scrollLeft) <= Math.abs(speed) ||
@@ -127,11 +119,10 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
   // effects
   // => 判断内容是否溢出屏幕
   useEffect(() => {
-    let menuWidth = menuRef.current?.getBoundingClientRect().width;
-    let menuWrapperWidth = menuWrapperRef.current?.getBoundingClientRect()
+    const menuWidth = menuRef.current?.getBoundingClientRect().width;
+    const menuWrapperWidth = menuWrapperRef.current?.getBoundingClientRect()
       .width;
-    menuWidth &&
-      menuWrapperWidth &&
+    if (menuWidth && menuWrapperWidth)
       setIsOverbrim(menuWrapperWidth > menuWidth);
   }, [menuRef, menuWrapperRef]);
   // => 计算游标位置
@@ -140,7 +131,7 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
       const cursorHalf = cursorRef.current.getBoundingClientRect().width / 2;
       const pos: number[] = [];
       menuItemsRef.current.forEach((dom, i) => {
-        let { left, width } = dom.getBoundingClientRect();
+        const { left, width } = dom.getBoundingClientRect();
         pos.push(left + width / 2 - cursorHalf);
       });
       setCursorPos(pos);
@@ -151,7 +142,7 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
     let parent: ScrollElement | null = null;
     const onScroll = (e: Event) => {
       // @ts-ignore
-      let scrollTop = +e.target?.scrollTop;
+      const scrollTop = +e.target?.scrollTop;
       if (scrollTop > tabsWrapperRef.current!.offsetTop) {
         setIsSticky(true);
       } else {
@@ -245,6 +236,6 @@ const Tabs = forwardRef<IRefs, IProps>((props, ref) => {
       {children && <div className="lg-tabs__content">{children}</div>}
     </div>
   );
-});
+};
 
 export default memo(Tabs);

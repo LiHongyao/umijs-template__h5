@@ -15,8 +15,8 @@ interface IProps {
   loadingText?: string;
   disabled?: boolean;
 
-  onDisabled?: () => void /**禁用状态时点击 */;
-  onTap?: () => void /**点击按钮 */;
+  onDisabled?: () => void /** 禁用状态时点击 */;
+  onTap?: () => void /** 点击按钮 */;
 }
 const Button: React.FC<IProps> = props => {
   // props
@@ -24,9 +24,9 @@ const Button: React.FC<IProps> = props => {
   // events
   const _onTap = () => {
     if (props.disabled) {
-      props.onDisabled && props.onDisabled();
+      if (props.onDisabled) props.onDisabled();
     } else {
-      !props.loading && props.onTap && props.onTap();
+      if (!props.loading && props.onTap) props.onTap();
     }
   };
   return (

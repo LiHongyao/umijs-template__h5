@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { kPullDownStatus, kPullUpStatus } from './index';
-
 /**
  * 下拉刷新
  * @param fetch   请求数据的函数
@@ -8,11 +7,11 @@ import { kPullDownStatus, kPullUpStatus } from './index';
  * @return [status, eventHandler]
  */
 export function usePullDown(
-  fetch: Function,
+  fetch: (...args: any) => Promise<kPullDownStatus>,
   isInit = false,
 ): [kPullDownStatus, () => void] {
   // status
-  let [pullDownStatus, setPullDownStatus] = useState<kPullDownStatus>(
+  const [pullDownStatus, setPullDownStatus] = useState<kPullDownStatus>(
     kPullDownStatus.REFRESH,
   );
   // handler
@@ -27,7 +26,7 @@ export function usePullDown(
     });
   };
   useEffect(() => {
-    isInit && onPullDown();
+    if (isInit) onPullDown();
   }, []);
   return [pullDownStatus, onPullDown];
 }
@@ -39,10 +38,10 @@ export function usePullDown(
  * @return [status, eventHandler, setPullUpStatus]
  */
 export function usePullUp(
-  fetch: Function,
+  fetch: (...args: any) => Promise<kPullUpStatus>,
   pullDownStatus: kPullDownStatus,
 ): [kPullUpStatus, () => void, (status: kPullUpStatus) => void] {
-  let [pullUpStatus, setPullUpStatus] = useState<kPullUpStatus>(
+  const [pullUpStatus, setPullUpStatus] = useState<kPullUpStatus>(
     kPullUpStatus.INITIAL,
   );
   const onPullUp = () => {

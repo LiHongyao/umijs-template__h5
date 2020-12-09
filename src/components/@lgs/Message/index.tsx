@@ -17,8 +17,8 @@ const info = (options: IConfigs | string) => {
   if (typeof options === 'string') {
     options = { message: options };
   }
-  let wrap = renderWrap();
-  let divs = document.createElement('div');
+  const wrap = renderWrap();
+  const divs = document.createElement('div');
   divs.setAttribute('class', 'lg-message__wrapper');
   wrap.appendChild(divs);
   ReactDom.render(

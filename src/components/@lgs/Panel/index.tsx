@@ -12,20 +12,13 @@ interface IProps {
 
 const Panel: FC<IProps> = props => {
   // props
-  const {
-    visible,
-    round = true,
-    children,
-    customStyle,
-    onClose,
-    customCls,
-  } = props;
+  const { visible, round = true, children, customStyle, customCls } = props;
   // events
   const onMaskTap = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.persist();
     const target = event.target as HTMLDivElement;
-    if (target.classList.contains('lg-panel')) {
-      onClose && onClose();
+    if (target.classList.contains('lg-panel') && props.onClose) {
+      props.onClose();
     }
   };
   // render

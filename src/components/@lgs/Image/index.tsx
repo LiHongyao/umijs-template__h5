@@ -14,7 +14,7 @@ const _Image: React.FC<IProps> = props => {
 
   useEffect(() => {
     const image = new Image();
-    image.onload = function() {
+    image.onload = () => {
       if (image.width > 1) {
         setInnerSrc(src);
       }

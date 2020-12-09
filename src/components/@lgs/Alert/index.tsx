@@ -3,15 +3,15 @@ import ReactDom from 'react-dom';
 import './index.less';
 
 interface IOptions {
-  message: string /**内容 */;
-  align?: 'left' | 'center' | 'right' /**内容对齐方式 */;
-  title?: string /**标题 */;
+  message: string /** 内容 */;
+  align?: 'left' | 'center' | 'right' /** 内容对齐方式 */;
+  title?: string /** 标题 */;
   showCancel?: boolean;
-  sureButtonText?: string /**确认按钮文案 */;
-  cancelButtonText?: string /**取消按钮文案 */;
-  icon?: any /**是否显示icon图标 */;
-  onSure?: () => void /**用户点击确认 */;
-  onCancel?: () => void /**用户点击取消 */;
+  sureButtonText?: string /** 确认按钮文案 */;
+  cancelButtonText?: string /** 取消按钮文案 */;
+  icon?: any /** 是否显示icon图标 */;
+  onSure?: () => void /** 用户点击确认 */;
+  onCancel?: () => void /** 用户点击取消 */;
 }
 interface IProps {
   dom: Element;
@@ -32,10 +32,10 @@ const Alert: FC<IProps> = props => {
     ReactDom.unmountComponentAtNode(dom);
     switch (type) {
       case 'sure':
-        props.config.onSure && props.config.onSure();
+        if (props.config.onSure) props.config.onSure();
         break;
       case 'cancel':
-        props.config.onCancel && props.config.onCancel();
+        if (props.config.onCancel) props.config.onCancel();
         break;
     }
   };

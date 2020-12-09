@@ -1,43 +1,3 @@
-/**
- * # 使用指南
- * 1. 安装依赖
- * $ yarn add @better-scroll/core @better-scroll/pull-down @better-scroll/pull-up
- *
- * 2. 导入
- * import Scroll, { kPullDownStatus, kPullUpStatus, kPullType, usePullDown, usePullUp } from '@/components/@lgs/Scroll'
- * 3. 定义状态属性
- * const listRef = useRef(null);
- * const [scrollHeight, setScrollHeight] = useState(0);
- * const [page, setPage] = useState(1);
- * const [list, setList] = useState<IListItem[] | null>(null);
- * 
- * 4. 计算scroll高度
- useEffect(() => {
-    const node = listRef.current;
-    if (node) {
-      setScrollHeight(
-        document.body.clientHeight - (node as HTMLDivElement).getBoundingClientRect().top,
-      );
-    }
-  }, [listRef]);
- *
- * 5. 使用usePullDown、usePullUp获取状态及相应的处理函数
- * const [pullDownStatus, onPullDown, setPullDownStatus] = usePullDown(getData, true);
- * const [pullUpStatus, onPullUp] = usePullUp(getData, pullDownStatus);
- *
- * 5. 使用组件
- * <Scroll
- *   height={scrollHeight}
- *   pullDownStatus={pullDownStatus}
- *   onPullDown={onPullDown}
- *   pullUpStatus={pullUpStatus}
- *  onPullUp={onPullUp}
- * >
- *   ...
- * </Scroll>
- *
- * 6. getData 里面返回promise
- */
 import React, { useState, useEffect, useRef, useImperativeHandle } from 'react';
 
 import { usePullDown, usePullUp } from './hooks';
@@ -77,16 +37,16 @@ BScroll.use(Pullup).use(PullDown);
 interface IProps {
   children: JSX.Element | JSX.Element[];
   height?: number;
-  onScroll?: Function;
-  onPullUp?: Function;
+  onScroll?: (data: any) => void;
+  onPullUp?: () => void;
   pullUpStatus?: kPullUpStatus;
-  onPullDown?: Function;
+  onPullDown?: () => void;
   pullDownStatus?: kPullDownStatus;
 }
 
 export interface IScrollRefs {
-  refresh: () => void /**刷新bScroll */;
-  scrollTo: (x: number, y: number, time?: number) => void /**滚动到指定位置 */;
+  refresh: () => void /** 刷新bScroll */;
+  scrollTo: (x: number, y: number, time?: number) => void /** 滚动到指定位置 */;
 }
 
 const Scroll = React.forwardRef<IScrollRefs, IProps>((props, ref) => {
@@ -170,7 +130,7 @@ const Scroll = React.forwardRef<IScrollRefs, IProps>((props, ref) => {
       (pullUpStatus === kPullUpStatus.MORE ||
         pullUpStatus === kPullUpStatus.NO_MORE)
     ) {
-      let _timer = setTimeout(() => {
+      const _timer = setTimeout(() => {
         bScroll.finishPullUp();
         bScroll.refresh();
         clearTimeout(_timer);
@@ -180,7 +140,7 @@ const Scroll = React.forwardRef<IScrollRefs, IProps>((props, ref) => {
   // 监听 - 下拉状态变化
   useEffect(() => {
     if (bScroll && pullDownStatus === kPullDownStatus.DONE) {
-      let _timer = setTimeout(() => {
+      const _timer = setTimeout(() => {
         bScroll.finishPullDown();
         bScroll.refresh();
         clearTimeout(_timer);

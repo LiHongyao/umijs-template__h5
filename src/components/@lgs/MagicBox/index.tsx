@@ -17,14 +17,14 @@ const MagicBox: FC<IProps> = props => {
 
   useEffect(() => {
     if (lgWrapper.current) {
-      let type = Object.prototype.toString
+      const type = Object.prototype.toString
         .call(props.children)
         .slice(8, -1)
         .toLowerCase();
       if (type === 'array') {
-        let children = props.children as JSX.Element[];
-        let w = lgWrapper.current.getBoundingClientRect().width;
-        let columns =
+        const children = props.children as JSX.Element[];
+        const w = lgWrapper.current.getBoundingClientRect().width;
+        const columns =
           children.length < maxColumns ? children.length : maxColumns;
         setWidth(() => {
           return (w - (columns - 1) * gap) / columns;
@@ -34,13 +34,14 @@ const MagicBox: FC<IProps> = props => {
   }, [lgWrapper]);
 
   const renderItems = () => {
-    let type = Object.prototype.toString
+    const type = Object.prototype.toString
       .call(props.children)
       .slice(8, -1)
       .toLowerCase();
     if (type === 'array') {
-      let children = props.children as JSX.Element[];
-      let columns = children.length < maxColumns ? children.length : maxColumns;
+      const children = props.children as JSX.Element[];
+      const columns =
+        children.length < maxColumns ? children.length : maxColumns;
       return children.map((element: JSX.Element, i: number) => {
         return (
           <section

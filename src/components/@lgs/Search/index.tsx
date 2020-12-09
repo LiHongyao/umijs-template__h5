@@ -17,19 +17,18 @@ const Search: React.FC<IProps> = props => {
     placeHolder = '请输入搜搜关键字',
     backgroundColor = '#FFFFFF',
     fieldStyle,
-    onChange,
     onSearch,
   } = props;
 
   const _onChange = useCallback(
-    (value: string) => {
-      setKeyword(value);
-      onChange && onChange(value);
+    (v: string) => {
+      setKeyword(v);
+      if (props.onChange) props.onChange(v);
     },
-    [onChange],
+    [props.onChange],
   );
   const _onSearch = () => {
-    onSearch && onSearch(keyword);
+    if (onSearch) onSearch(keyword);
   };
 
   return (

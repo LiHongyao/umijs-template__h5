@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Keyboard from './Keyboard';
-import eventBus from '../lib/eventBus';
 import './index.less';
+import Bus from 'lg-bus';
 
 interface IProps {
   value: string;
@@ -12,16 +12,16 @@ interface IProps {
 
   placeholder?: string;
   autoFocus?: boolean;
-  digits?: number /**小数点前的位数 */;
-  max?: number /**可输入的最大值 */;
-  actionText?: string /**确认按钮文字 */;
-  align?: 'left' | 'center' | 'right' /**对齐方式 */;
-  clear?: boolean /**是否显示清除按钮 */;
+  digits?: number /** 小数点前的位数 */;
+  max?: number /** 可输入的最大值 */;
+  actionText?: string /** 确认按钮文字 */;
+  align?: 'left' | 'center' | 'right' /** 对齐方式 */;
+  clear?: boolean /** 是否显示清除按钮 */;
 
-  onChange: (value: string) => void /**数值变化 */;
-  onAction?: () => void /**点击确认按钮 */;
-  onOverMax?: () => void /**超过最大值 */;
-  onOverDigits?: () => void /**超过小数点前最大位数 */;
+  onChange: (value: string) => void /** 数值变化 */;
+  onAction?: () => void /** 点击确认按钮 */;
+  onOverMax?: () => void /** 超过最大值 */;
+  onOverDigits?: () => void /** 超过小数点前最大位数 */;
 }
 
 let HAS_AUTO_FOCUS: boolean = false;
@@ -36,7 +36,7 @@ const Input: FC<IProps> = props => {
   const [letters, setLetters] = useState<string[]>([]);
   const [focus, setFocus] = useState(false);
 
-  /**渲染组件 */
+  /** 渲染组件 */
   const renderKeyboard = () => {
     // 判断是否已经插入容键盘容器
     let container = document.getElementById('lg-keyboard');
@@ -50,8 +50,8 @@ const Input: FC<IProps> = props => {
     // 判断初始化时是否自动获取焦点（优先第1个设置autoFocus为true的Input元素）
     if (props.autoFocus && !HAS_AUTO_FOCUS) {
       HAS_AUTO_FOCUS = true;
-      let t = setTimeout(() => {
-        eventBus.$emit('LG_KEYBOARD_TOGGLE_VISIBLE', {
+      const t = setTimeout(() => {
+        Bus.$emit('LG_KEYBOARD_TOGGLE_VISIBLE', {
           visible: true,
           actionText,
         });
@@ -65,22 +65,22 @@ const Input: FC<IProps> = props => {
   const onWrapperTap = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
-    eventBus.$emit('LG_KEYBOARD_BLUR');
+    Bus.$emit('LG_KEYBOARD_BLUR');
     setFocus(true);
-    eventBus.$emit('LG_KEYBOARD_TOGGLE_VISIBLE', { visible: true, actionText });
+    Bus.$emit('LG_KEYBOARD_TOGGLE_VISIBLE', { visible: true, actionText });
     event.nativeEvent.stopImmediatePropagation();
   };
   // effects
-  /**渲染键盘 */
+  /** 渲染键盘 */
   useEffect(() => {
     renderKeyboard();
   }, []);
-  /**事件监听 */
+  /** 事件监听 */
   useEffect(() => {
     // 1. 监听数字输入
-    let change = (v: string) => {
+    const change = (v: string) => {
       if (focus) {
-        let _value = letters.join('');
+        const _value = letters.join('');
         if (_value.length === 0 && /·/.test(v)) {
           // 如果用户直接输入小数点，则在前面插入‘0’
           props.onChange('0.');
@@ -92,19 +92,19 @@ const Input: FC<IProps> = props => {
           if (/\./.test(_value)) {
             // 有小数点
             if (+(_value + v) >= max) {
-              props.onOverMax && props.onOverMax();
+              if (props.onOverMax) props.onOverMax();
             } else if (/^[0-9]$/.test(v) && _value.split('.')[1].length < 2) {
               props.onChange(_value + v);
             }
           } else {
             // 无小数点
             if (+(_value + v) > max) {
-              props.onOverMax && props.onOverMax();
+              if (props.onOverMax) props.onOverMax();
             } else if (!/^·$/.test(v) && _value.length >= digits) {
-              props.onOverDigits && props.onOverDigits();
+              if (props.onOverDigits) props.onOverDigits();
             } else if (/^·$/.test(v)) {
               if (+_value >= max) {
-                props.onOverMax && props.onOverMax();
+                if (props.onOverMax) props.onOverMax();
               } else {
                 props.onChange(_value + '.');
               }
@@ -115,12 +115,12 @@ const Input: FC<IProps> = props => {
         }
       }
     };
-    eventBus.$on('LG_KEYBOARD_INPUT', change);
+    Bus.$on('LG_KEYBOARD_INPUT', change);
     // 2. 监听清除
-    let clear = () => {
+    const _clear = () => {
       if (letters.length > 0 && focus) {
         // 如果是0.x,当删除到x的时候直接删除所有
-        let ch = letters[letters.length - 1];
+        const ch = letters[letters.length - 1];
         if (/^0\./.test(letters.join('')) && letters.lastIndexOf(ch) === 2) {
           props.onChange('');
         } else {
@@ -128,36 +128,36 @@ const Input: FC<IProps> = props => {
         }
       }
     };
-    eventBus.$on('LG_KEYBOARD_CLEAR', clear);
+    Bus.$on('LG_KEYBOARD_CLEAR', _clear);
     // 3. 监听确认
-    let sure = () => {
+    const sure = () => {
       if (focus) {
-        props.onAction && props.onAction();
+        if (props.onAction) props.onAction();
         setFocus(false);
-        eventBus.$emit('LG_KEYBOARD_TOGGLE_VISIBLE', {
+        Bus.$emit('LG_KEYBOARD_TOGGLE_VISIBLE', {
           visible: false,
           actionText,
         });
       }
     };
-    eventBus.$on('LG_KEYBOARD_ACTION', sure);
+    Bus.$on('LG_KEYBOARD_ACTION', sure);
     // 4. 监听失去焦点
-    let blur = () => {
+    const blur = () => {
       if (focus) {
         setFocus(false);
       }
     };
-    eventBus.$on('LG_KEYBOARD_BLUR', blur);
+    Bus.$on('LG_KEYBOARD_BLUR', blur);
 
     return () => {
-      eventBus.$off('LG_KEYBOARD_INPUT', change);
-      eventBus.$off('LG_KEYBOARD_CLEAR', clear);
-      eventBus.$off('LG_KEYBOARD_ACTION', sure);
-      eventBus.$off('LG_KEYBOARD_BLUR', blur);
+      Bus.$off('LG_KEYBOARD_INPUT', change);
+      Bus.$off('LG_KEYBOARD_CLEAR', _clear);
+      Bus.$off('LG_KEYBOARD_ACTION', sure);
+      Bus.$off('LG_KEYBOARD_BLUR', blur);
     };
   }, [letters, focus]);
 
-  /**监听value */
+  /** 监听value */
   useEffect(() => {
     setLetters(props.value.split(''));
   }, [props.value]);
@@ -182,7 +182,7 @@ const Input: FC<IProps> = props => {
           </div>
         )}
         {/* 占位符 */}
-        {letters.length == 0 && (
+        {letters.length === 0 && (
           <div
             className={`lg-input__placeholder lg-input__cursor  ${
               focus ? '__cursor' : ''

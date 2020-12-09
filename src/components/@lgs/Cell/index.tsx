@@ -5,17 +5,17 @@ import './index.less';
 interface IProps {
   children?: JSX.Element | JSX.Element[];
 
-  icon?: any /* 缩略图 */;
-  title?: string | number /* 标题 */;
-  subTitle?: string | number /* 内容区域标题*/;
-  value?: string | number /* 内容 */;
-  label?: string | number /* 标题下方的描述信息 */;
-  extra?: string | number /* 右侧内容 */;
-  underline?: boolean /* 底部分割线 */;
-  isLink?: boolean /* 是否显示右侧链接箭头 */;
-  linkIcon?: any /**自定义link图标 */;
-  required?: boolean /* 是否显示必填“*”指示 */;
-  disabled?: boolean /**是否禁用 */;
+  icon?: any /** 缩略图 */;
+  title?: string | number /** 标题 */;
+  subTitle?: string | number /** 内容区域标题 */;
+  value?: string | number /** 内容 */;
+  label?: string | number /** 标题下方的描述信息 */;
+  extra?: string | number /** 右侧内容 */;
+  underline?: boolean /** 底部分割线 */;
+  isLink?: boolean /** 是否显示右侧链接箭头 */;
+  linkIcon?: any /** 自定义link图标 */;
+  required?: boolean /** 是否显示必填“*”指示 */;
+  disabled?: boolean /** 是否禁用 */;
 
   iconStyle?: CSSProperties;
   cellStyle?: CSSProperties;
@@ -34,12 +34,12 @@ interface IProps {
   iconCls?: string;
   extraCls?: string;
 
-  renderExtra?: () => JSX.Element /* 自定义最右侧内容 */;
-  renderValue?: () => JSX.Element /* 自定义value内容 */;
-  renderLabel?: () => JSX.Element /* 自定义label内容 */;
+  renderExtra?: () => JSX.Element /** 自定义最右侧内容 */;
+  renderValue?: () => JSX.Element /** 自定义value内容 */;
+  renderLabel?: () => JSX.Element /** 自定义label内容 */;
 
   onTap?: () => void;
-  onDisabled?: () => void /**当在禁用状态下点击时 */;
+  onDisabled?: () => void /** 当在禁用状态下点击时 */;
 }
 const Cell: React.FC<IProps> = props => {
   const {
@@ -76,9 +76,9 @@ const Cell: React.FC<IProps> = props => {
       style={cellStyle}
       onClick={() => {
         if (props.disabled) {
-          props.onDisabled && props.onDisabled();
+          if (props.onDisabled) props.onDisabled();
         } else {
-          props.onTap && props.onTap();
+          if (props.onTap) props.onTap();
         }
       }}
     >

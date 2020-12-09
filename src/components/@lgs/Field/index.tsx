@@ -13,7 +13,7 @@ interface IProps {
   type?: 'text' | 'password' | 'number' | 'tel';
   clear?: boolean;
   disabled?: boolean;
-  focus?: boolean /**是否获取焦点（手动控制） */;
+  focus?: boolean /** 是否获取焦点（手动控制） */;
 
   underline?: boolean;
   underlineStyle?: CSSProperties;
@@ -51,7 +51,7 @@ const Field: React.FC<IProps> = props => {
   // events
   const _onChange = (event: FormEvent<HTMLInputElement>) => {
     event.persist();
-    let value = event.currentTarget.value;
+    const value = event.currentTarget.value;
     if (props.rule && !props.rule.test(value)) {
       return;
     }

@@ -45,8 +45,8 @@ const AddressPicker: FC<IProps> = props => {
   // methods
   /** 获取数据 */
   const getData = (code: string) => {
-    props.onFetch(code).then((items: IAddressPickerModel[]) => {
-      setItems(items);
+    props.onFetch(code).then((_items: IAddressPickerModel[]) => {
+      setItems(_items);
     });
   };
 

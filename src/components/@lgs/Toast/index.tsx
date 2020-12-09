@@ -3,13 +3,13 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import './index.less';
 
-interface Iconfigs {
+interface IConfigs {
   message?: string;
   duration?: number;
   type: 'loading' | 'info';
 }
 
-let __toast_timer: any;
+let TOAST_TIMER: any;
 const getToast = (props: { message?: string; loading: boolean }) => {
   return (
     <div className="lg-toast__wrapper">
@@ -39,16 +39,16 @@ const getWrap = () => {
     wrap.setAttribute('class', 'lg-toast');
     document.body.appendChild(wrap);
   }
-  let child = wrap.querySelector('lg-toast__box');
+  const child = wrap.querySelector('lg-toast__box');
   if (child) {
     child.remove();
   }
   return wrap;
 };
 
-const render = (configs: Iconfigs) => {
-  clearTimeout(__toast_timer);
-  let wrap = getWrap();
+const render = (configs: IConfigs) => {
+  clearTimeout(TOAST_TIMER);
+  const wrap = getWrap();
   ReactDom.render(
     getToast({
       message: configs.message,
@@ -57,9 +57,9 @@ const render = (configs: Iconfigs) => {
     wrap,
   );
   if (configs.duration) {
-    __toast_timer = setTimeout(() => {
+    TOAST_TIMER = setTimeout(() => {
       ReactDom.unmountComponentAtNode(wrap);
-      clearTimeout(__toast_timer);
+      clearTimeout(TOAST_TIMER);
     }, configs.duration * 1000);
   }
 };
@@ -71,7 +71,7 @@ const loading = (message?: string) => {
   render({ message, type: 'loading' });
 };
 const hide = () => {
-  let wrap = getWrap();
+  const wrap = getWrap();
   ReactDom.unmountComponentAtNode(wrap);
 };
 

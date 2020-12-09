@@ -10,14 +10,14 @@ interface Iprops {
 }
 
 const LoadMore: FC<Iprops> = props => {
-  let {
+  const {
     color = '#999999',
     visible = false,
     status = kPullUpStatus.MORE,
   } = props;
 
-  const statusText = (status: kPullUpStatus) => {
-    switch (status) {
+  const statusText = (_status: kPullUpStatus) => {
+    switch (_status) {
       case kPullUpStatus.MORE:
         return '上拉加载更多';
       case kPullUpStatus.NO_MORE:

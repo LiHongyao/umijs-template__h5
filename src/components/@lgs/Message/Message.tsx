@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import ReactDom from 'react-dom';
 
 export interface IConfigs {
@@ -9,8 +9,8 @@ export interface IConfigs {
 }
 
 interface IProps {
-  rootDom: HTMLElement; //这个用来干掉parentDom 这个可以常驻
-  parentDom: HTMLElement; //这个是挂载点 要unmount卸载 完毕后卸载挂载点 注意！一共2步卸载，别漏了
+  rootDom: HTMLElement; // 这个用来干掉parentDom 这个可以常驻
+  parentDom: HTMLElement; // 这个是挂载点 要unmount卸载 完毕后卸载挂载点 注意！一共2步卸载，别漏了
   config: IConfigs;
 }
 
@@ -31,9 +31,9 @@ const Message: FC<IProps> = props => {
   }, [parentDom, rootDom]);
 
   useEffect(() => {
-    let t1 = setTimeout(() => {
+    const t1 = setTimeout(() => {
       parentDom.classList.add('ani-out');
-      let t2 = setTimeout(() => {
+      const t2 = setTimeout(() => {
         unmount();
         clearTimeout(t2);
       }, 350);

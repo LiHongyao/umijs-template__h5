@@ -25,30 +25,31 @@ const DragView: FC<IProps> = props => {
     const clientWidth = window.innerWidth;
     const clientHeight = window.innerHeight;
     // 2. 获取容器元素的尺寸信息
-    // @ts-ignore
-    const rect = lgWrapper.current.getBoundingClientRect();
-    // 3. 获取用户设置的位置信息
-    const [top, right, bottom, left] = props.position;
-    setPos({ x: left, y: top });
-    if (right) {
-      setPos(prevState => ({
-        ...prevState,
-        x: clientWidth - right - rect.width,
-      }));
+    if (lgWrapper.current) {
+      const _rect = lgWrapper.current.getBoundingClientRect();
+      // 3. 获取用户设置的位置信息
+      const [top, right, bottom, left] = props.position;
+      setPos({ x: left, y: top });
+      if (right) {
+        setPos(prevState => ({
+          ...prevState,
+          x: clientWidth - right - _rect.width,
+        }));
+      }
+      if (bottom) {
+        setPos(prevState => ({
+          ...prevState,
+          y: clientHeight - bottom - _rect.height,
+        }));
+      }
+      // 4. 记录容器尺寸信息
+      setRect(_rect);
+      // 5. 获取拖拽元素在屏幕内可拖拽的边界值
+      setOffset({
+        x: clientWidth - _rect.width,
+        y: clientHeight - _rect.height,
+      });
     }
-    if (bottom) {
-      setPos(prevState => ({
-        ...prevState,
-        y: clientHeight - bottom - rect.height,
-      }));
-    }
-    // 4. 记录容器尺寸信息
-    setRect(rect);
-    // 5. 获取拖拽元素在屏幕内可拖拽的边界值
-    setOffset({
-      x: clientWidth - rect.width,
-      y: clientHeight - rect.height,
-    });
   };
   // effects
   useEffect(() => {
@@ -66,7 +67,7 @@ const DragView: FC<IProps> = props => {
   useEffect(() => {
     const onMove = (event: TouchEvent) => {
       // 获取触点，兼容PC和移动端
-      let touch = event.touches[0];
+      const touch = event.touches[0];
       // 定位滑块的位置
       let x = touch.clientX - rect.width / 2;
       let y = touch.clientY - rect.height / 2;
@@ -91,7 +92,7 @@ const DragView: FC<IProps> = props => {
       });
     }
     return () => {
-      lgWrapper.current &&
+      if (lgWrapper.current)
         lgWrapper.current.removeEventListener('touchmove', onMove);
     };
   }, [lgWrapper, offset, rect]);
@@ -106,7 +107,7 @@ const DragView: FC<IProps> = props => {
         top: `${pos.y}px`,
       }}
       onClick={() => {
-        props.onTap && props.onTap();
+        if (props.onTap) props.onTap();
       }}
     >
       {props.children}
