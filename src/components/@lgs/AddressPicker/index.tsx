@@ -1,5 +1,5 @@
 import classNames from 'lg-classnames';
-import React, { FC, memo, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import './index.less';
 
 export interface IAddressPickerModel {
@@ -23,6 +23,8 @@ interface IProps {
 }
 
 const AddressPicker: FC<IProps> = props => {
+  // ref
+  const itemsWrapRef = useRef<HTMLUListElement | null>(null);
   // state
   const [selectedKey, setSelectedKey] = useState<KeyType>(
     'province',
@@ -47,6 +49,9 @@ const AddressPicker: FC<IProps> = props => {
   const getData = (code: string) => {
     props.onFetch(code).then((_items: IAddressPickerModel[]) => {
       setItems(_items);
+      if (itemsWrapRef.current) {
+        itemsWrapRef.current.scrollTop = 0;
+      }
     });
   };
 
@@ -108,6 +113,9 @@ const AddressPicker: FC<IProps> = props => {
       getData('');
     }
   }, []);
+  useEffect(() => {
+    document.body.style.overflow = props.visible ? 'hidden' : 'scroll';
+  }, [props.visible]);
 
   // render
   return (
@@ -164,7 +172,7 @@ const AddressPicker: FC<IProps> = props => {
           )}
         </div>
         {/* 选择项 */}
-        <ul className="lg-address-picker__list">
+        <ul className="lg-address-picker__list" ref={itemsWrapRef}>
           {items.map((item, i) => (
             <li
               key={`lg-address-picker__choose_${i}`}

@@ -7,7 +7,7 @@ import { kPullDownStatus, kPullUpStatus } from './index';
  * @return [status, eventHandler]
  */
 export function usePullDown(
-  fetch: (...args: any) => Promise<kPullDownStatus>,
+  fetch: (...args: any) => Promise<any>,
   isInit = false,
 ): [kPullDownStatus, () => void] {
   // status
@@ -38,7 +38,7 @@ export function usePullDown(
  * @return [status, eventHandler, setPullUpStatus]
  */
 export function usePullUp(
-  fetch: (...args: any) => Promise<kPullUpStatus>,
+  fetch: (...args: any) => Promise<any>,
   pullDownStatus: kPullDownStatus,
 ): [kPullUpStatus, () => void, (status: kPullUpStatus) => void] {
   const [pullUpStatus, setPullUpStatus] = useState<kPullUpStatus>(

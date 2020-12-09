@@ -1,8 +1,8 @@
 import { extend, RequestOptionsInit } from 'umi-request';
 import { Toast } from 'antd-mobile';
-import jumpSchemes from '@/utils/jumpSchemes';
 import Tools from 'lg-tools';
 import Cookie from 'lg-cookie';
+import Schemes from 'lg-schemes';
 
 const service = extend({
   prefix: process.env.HOST,
@@ -45,7 +45,7 @@ service.interceptors.response.use(async response => {
     case 0:
       return res;
     case -10:
-      jumpSchemes.jump('/login');
+      Schemes.jump('/login');
       break;
     default:
       Toast.info(res.msg);
