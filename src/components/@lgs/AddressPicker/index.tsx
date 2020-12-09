@@ -1,5 +1,6 @@
 import classNames from 'lg-classnames';
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import Loading2 from '../Loading2';
 import './index.less';
 
 export interface IAddressPickerModel {
@@ -24,7 +25,7 @@ interface IProps {
 
 const AddressPicker: FC<IProps> = props => {
   // ref
-  const itemsWrapRef = useRef<HTMLUListElement | null>(null);
+  const itemsWrapRef = useRef<HTMLDivElement | null>(null);
   // state
   const [selectedKey, setSelectedKey] = useState<KeyType>(
     'province',
@@ -32,6 +33,8 @@ const AddressPicker: FC<IProps> = props => {
   const [items, setItems] = useState<IAddressPickerModel[]>(
     [] as IAddressPickerModel[],
   ); /** 列表数据 */
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(!props.data);
   const [innerData, setInnerData] = useState<IAddressPickerData>(() => {
     if (props.data) {
       return props.data;
@@ -47,8 +50,10 @@ const AddressPicker: FC<IProps> = props => {
   // methods
   /** 获取数据 */
   const getData = (code: string) => {
+    setLoading(true);
     props.onFetch(code).then((_items: IAddressPickerModel[]) => {
       setItems(_items);
+      setLoading(false);
       if (itemsWrapRef.current) {
         itemsWrapRef.current.scrollTop = 0;
       }
@@ -57,6 +62,7 @@ const AddressPicker: FC<IProps> = props => {
 
   // events
   const onTap = (key: KeyType) => {
+    setDisabled(true);
     setSelectedKey(key);
     setItems([]);
     let code = '';
@@ -84,6 +90,7 @@ const AddressPicker: FC<IProps> = props => {
   };
 
   const onItemTap = (item: IAddressPickerModel) => {
+    setDisabled(true);
     setInnerData(prev => ({
       ...prev,
       [selectedKey]: { ...item },
@@ -96,16 +103,19 @@ const AddressPicker: FC<IProps> = props => {
       setSelectedKey('area');
       getData(item.code);
     } else if (selectedKey === 'area') {
-      setItems([]);
+      setDisabled(false);
     }
+    setItems([]);
   };
   const onInnerSure = () => {
-    props.onSure({
-      province: { ...innerData.province },
-      city: { ...innerData.city },
-      area: { ...innerData.area },
-    });
-    props.onClose();
+    if (!disabled) {
+      props.onSure({
+        province: { ...innerData.province },
+        city: { ...innerData.city },
+        area: { ...innerData.area },
+      });
+      props.onClose();
+    }
   };
   // effects
   useEffect(() => {
@@ -172,20 +182,32 @@ const AddressPicker: FC<IProps> = props => {
           )}
         </div>
         {/* 选择项 */}
-        <ul className="lg-address-picker__list" ref={itemsWrapRef}>
-          {items.map((item, i) => (
-            <li
-              key={`lg-address-picker__choose_${i}`}
-              onClick={() => {
-                onItemTap(item);
-              }}
-            >
-              {item.fullName}
-            </li>
-          ))}
-        </ul>
+        <div className="lg-address-picker__list" ref={itemsWrapRef}>
+          <>
+            {/* 数据 */}
+            {items.map((item, i) => (
+              <section
+                className="lg-address-picker__list_item"
+                key={`lg-address-picker__choose_${i}`}
+                onClick={() => {
+                  onItemTap(item);
+                }}
+              >
+                {item.fullName}
+              </section>
+            ))}
+            {/* loading */}
+            {loading && <Loading2 />}
+          </>
+        </div>
         {/* 确认按钮 */}
-        <div className="lg-address-picker__button" onClick={onInnerSure}>
+        <div
+          className={classNames([
+            'lg-address-picker__button',
+            { disabled: disabled },
+          ])}
+          onClick={onInnerSure}
+        >
           确认
         </div>
         {/* 关闭按钮 */}

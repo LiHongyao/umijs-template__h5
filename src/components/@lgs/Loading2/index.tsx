@@ -15,14 +15,12 @@ const Loading2: FC<IProps> = ({
 }) => {
   return (
     <div className="lg-loading2" style={{ paddingTop: top }}>
-      <div
-        className="lg-loading2__ct"
-        style={{
-          background: `url(${
-            icon ? icon : require('./images/logo.png')
-          }) center center no-repeat / 22px 22px`,
-        }}
-      >
+      <div className="lg-loading2__ct">
+        <img
+          src={icon ? icon : require('./images/logo.png')}
+          alt=""
+          className="lg-loading2__logo"
+        />
         <div className="lg-loading2__icon" />
       </div>
       {showTips && <div className="lg-loading2__tips">{tips}</div>}

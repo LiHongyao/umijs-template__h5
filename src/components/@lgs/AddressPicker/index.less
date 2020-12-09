@@ -67,12 +67,18 @@
   overflow-y: scroll;
   margin: 10px 0 20px;
 }
-.lg-address-picker__list li {
+.lg-address-picker__list_item {
   height: 34px;
   display: flex;
   align-items: center;
   font-size: 14px;
   color: #444444;
+}
+.lg-address-picker__loading {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .lg-address-picker__button {
   width: 205px;
@@ -87,6 +93,10 @@
   border-radius: 18px;
   color: #ffffff;
   font-size: 14px;
+
+  &.disabled {
+    opacity: 0.5;
+  }
 }
 .lg-address-picker__close_btn {
   width: 30px;
