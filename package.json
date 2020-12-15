@@ -4,7 +4,7 @@
     "start": "cross-env UMI_ENV=dev umi dev",
     "build": "cross-env UMI_ENV=prod umi build",
     "test": "cross-env UMI_ENV=test umi build",
-    "update": "yarn upgrade-interactive",
+    "update": "yarn upgrade-interactive --latest",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test:coverage": "umi-test --coverage"
@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@ant-design/pro-layout": "^5.0.12",
+    "@ant-design/pro-layout": "^6.6.2",
     "@better-scroll/core": "^2.0.5",
     "@better-scroll/pull-down": "^2.0.5",
     "@better-scroll/pull-up": "^2.0.5",
@@ -33,7 +33,7 @@
     "crypto-js": "^4.0.0",
     "default-passive-events": "^2.0.0",
     "lg-big": "^1.0.2",
-    "lg-bus": "^1.0.1",
+    "lg-bus": "^1.0.2",
     "lg-classnames": "^1.0.3",
     "lg-cookie": "^1.0.1",
     "lg-js-bridge": "^1.0.5",
@@ -43,11 +43,11 @@
     "lg-validator": "^1.0.0",
     "lint-staged": "^10.0.7",
     "lottie-react-web": "^2.2.2",
-    "postcss-flexbugs-fixes": "^4.2.1",
+    "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-px-to-viewport": "^1.1.1",
-    "prettier": "^1.19.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "umi": "^3.2.20",
     "vconsole": "^3.3.4",
     "yorkie": "^2.0.0"
