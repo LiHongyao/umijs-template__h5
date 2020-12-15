@@ -3,10 +3,17 @@ import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import Loading2 from '../Loading2';
 import './index.less';
 
+/**
+ * 数据模型
+ */
 export interface IAddressPickerModel {
   code: string;
   fullName: string;
 }
+
+/**
+ * 省市区数据模型
+ */
 export interface IAddressPickerData {
   province: IAddressPickerModel;
   city: IAddressPickerModel;
@@ -33,9 +40,10 @@ const AddressPicker: FC<IProps> = props => {
   const [items, setItems] = useState<IAddressPickerModel[]>(
     [] as IAddressPickerModel[],
   ); /** 列表数据 */
-  const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(!props.data);
+  const [loading, setLoading] = useState(false); /** 记录loading态 */
+  const [disabled, setDisabled] = useState(!props.data); /** 是否禁用确定按钮 */
   const [innerData, setInnerData] = useState<IAddressPickerData>(() => {
+    /** 默认值 */
     if (props.data) {
       return props.data;
     } else {
@@ -45,7 +53,7 @@ const AddressPicker: FC<IProps> = props => {
         area: { code: '', fullName: '' },
       };
     }
-  }); /** 内部选中数据 */
+  });
 
   // methods
   /** 获取数据 */
@@ -61,6 +69,7 @@ const AddressPicker: FC<IProps> = props => {
   };
 
   // events
+  /** 点击类目 */
   const onTap = (key: KeyType) => {
     setDisabled(true);
     setSelectedKey(key);
@@ -88,7 +97,7 @@ const AddressPicker: FC<IProps> = props => {
     }
     getData(code);
   };
-
+  /** 点击列表 */
   const onItemTap = (item: IAddressPickerModel) => {
     setDisabled(true);
     setInnerData(prev => ({
@@ -118,11 +127,13 @@ const AddressPicker: FC<IProps> = props => {
     }
   };
   // effects
+  /** 请求数据 */
   useEffect(() => {
     if (!innerData.province.code) {
       getData('');
     }
   }, []);
+  /** 阻止显示时页面可拖拽 */
   useEffect(() => {
     document.body.style.overflow = props.visible ? 'hidden' : 'scroll';
   }, [props.visible]);
