@@ -44,7 +44,7 @@ export default defineConfig({
   },
   /** 移动端布局适配 */
   extraPostCSSPlugins: [
-    require('postcss-flexbugs-fixes'),
+    // require('postcss-flexbugs-fixes'),
     require('postcss-px-to-viewport')({
       viewportWidth: 375, // 视窗的宽度，对应的是我们设计稿的宽度，一般是375
       unitPrecision: 3, // 指定`px`转换为视窗单位值的小数位数（很多时候无法整除）
