@@ -6,6 +6,10 @@ interface IToggleParams {
   visible: boolean;
   actionText: string;
 }
+
+let __TIME_OUT: any;
+let __TIME_INTERVAL: any;
+
 const Keyboard: FC = () => {
   const [visible, setVisible] = useState(false);
   const [actionText, setActionText] = useState('');
@@ -23,14 +27,26 @@ const Keyboard: FC = () => {
     Bus.$emit('LG_KEYBOARD_INPUT', num);
     event.nativeEvent.stopImmediatePropagation();
   };
-  const onClear = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    Bus.$emit('LG_KEYBOARD_CLEAR');
-    event.nativeEvent.stopImmediatePropagation();
-  };
   const onSureButtonTap = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     Bus.$emit('LG_KEYBOARD_ACTION');
+    event.nativeEvent.stopImmediatePropagation();
+  };
+  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    __TIME_OUT = setTimeout(() => {
+      __TIME_INTERVAL = setInterval(() => {
+        Bus.$emit('LG_KEYBOARD_CLEAR');
+      }, 100);
+    }, 800);
+    event.nativeEvent.stopImmediatePropagation();
+  };
+  const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    Bus.$emit('LG_KEYBOARD_CLEAR');
+    clearTimeout(__TIME_OUT);
+    clearInterval(__TIME_INTERVAL);
+    __TIME_INTERVAL = null;
+    __TIME_OUT = null;
     event.nativeEvent.stopImmediatePropagation();
   };
 
@@ -74,7 +90,13 @@ const Keyboard: FC = () => {
       <div className="lg-keyboard__item" onClick={onItemTap} data-key="1" />
       <div className="lg-keyboard__item" onClick={onItemTap} data-key="2" />
       <div className="lg-keyboard__item" onClick={onItemTap} data-key="3" />
-      <div className="lg-keyboard__item clear" onClick={onClear} />
+      <div
+        className="lg-keyboard__item clear"
+        onContextMenu={(e) => e.preventDefault()}
+        onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      />
       <div className="lg-keyboard__item" onClick={onItemTap} data-key="4" />
       <div className="lg-keyboard__item" onClick={onItemTap} data-key="5" />
       <div className="lg-keyboard__item" onClick={onItemTap} data-key="6" />
