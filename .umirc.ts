@@ -21,8 +21,8 @@ export default defineConfig({
       .use('file-loader')
       .loader('file-loader');
   },
+  /** 设置要复制到输出目录的文件或文件夹*/
   /*
-  // 设置要复制到输出目录的文件或文件夹。
   copy: [
     {
       from: './src/public/images',
@@ -36,10 +36,11 @@ export default defineConfig({
     implementation: require('node-sass'),
   },*/
 
-  /** 是否启用按需加载 */
+  /** 启用dva状态管理 */
   dva: {},
-  /** 动态加载loading */
+  /** 是否启用按需加载 */
   dynamicImport: {
+    /** 动态加载loading */
     loading: '@/Loading',
   },
   /** 移动端布局适配 */

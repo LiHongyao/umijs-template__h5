@@ -2,43 +2,49 @@
 
 ```
 .
-├── build       # 执行 umi build 后，产物默认会存放在这里
-├── mock        # 存储 mock 文件，此目录下所有 js 和 ts 文件会被解析为 mock 文件
-├──  src        # 源码文件
-    ├── .umi    # 临时文件目录
-    ├── Api     # 接口请求
-    ├── assets      # 静态资源
-    ├── components  # 公共组件（页面级/项目级公共组件）
-    		├── @lgs    # 公共组件（项目级）
-        ├── ...     # 其他组件（页面级）
+├── mock # 存储 mock 文件，此目录下所有 js 和 ts 文件会被解析为 mock 文件。PS：目前我基本没用到
+├── node_modules # npm 依赖文件
+├── src  # 源码文件
+    ├── .umi # 临时文件目录，umi自动生成，无需管它
+    ├── Api  # 接口请求
+        ├── index.ts   # 入口文件
+        ├── request.ts # 请求封装
+        └── test.ts    # 示例代码
+    ├── assets/images  # 静态资源文件
+    ├── components     # 公共组件
     ├── constants
-    		├── interface.d.ts # 全局TS类型定义
-    ├── models      # dva 
-    ├── pages       # 路由组件
-		    ├── IndexPage     # 页面
-        	 ├── components # 页面级组件
-        	 ├── images     # 页面级图片资源
-           ├── index.less # 页面级样式（推荐使用less）
-           └── index.tsx  # 页面级逻辑部分 
-        ├── 404           # 404页面
-        └── document.ejs  # Html模板文件/可以引入百度统计或者CDN引入等操作
-    ├── public            # 此目录下所有文件会被 copy 到输出路径
-    ├── utils # 工具类
-        ├── secret.ts       # 加密解密相关
-        └── validator.ts    # 正则验证相关
-    ├── app.ts              # 运行时配置文件，可以在这里扩展运行时的能力，比如修改路由、修改 render 方法等
-    ├── global.css          # 全局样式文件
-    ├── global.ts           # 全局脚本部分
-    └── Loading.tsx         # 页面加载Loading
-├── .env            # 配置文件（端口配置）
-├── .umirc.dev.ts   # 配置文件（开发环境）
-├── .umirc.prod.ts  # 配置文件（生产环境）
-├── .umirc.test.ts  # 配置文件（测试环境）
-├── .umirc.ts       # 配置文件，包含 umi 内置功能和插件的配置
-└── package.json  
+        └── interface.d.ts # 全局TS类型定义
+    ├── models  # dva 状态管理文件，基于Redux + redux-saga。PS：根据需要使用，原生+H5模式下我基本不用
+    ├── pages   # 页面路由
+        ├── IndexPage  # 主页面/其他页面组件范式可参照IndexPage构建
+            ├── components # 页面级组件
+            ├── images     # 页面级图片资源
+            ├── index.less # 页面级样式（推荐使用less）
+            └── index.tsx  # 页面级逻辑部分 
+        ├── 404            # 404页面
+        └── document.ejs   # Html模板文件/可以在这里引入百度统计脚本或者CDN引入等操作
+    ├── public             # 此目录下所有文件会被 copy 到输出路径
+    ├── utils   # 工具类脚本
+    ├── app.ts  # 运行时配置文件，可以在这里扩展运行时的能力，比如修改路由、修改 render 方法等
+    ├── global.css  # 全局样式文件
+    ├── global.ts   # 全局脚本部分
+    └── Loading.tsx # 按需加载时的页面加载Loading效果
+├── .editorconfig
+├── .env              # 配置文件（端口配置）
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── .umirc.dev.ts     # 配置文件（开发环境）
+├── .umirc.prod.ts    # 配置文件（生产环境）
+├── .umirc.test.ts    # 配置文件（测试环境）
+├── .umirc.ts         # 配置文件，包含 umi 内置功能和插件的配置
+├── package.json
+├── README.md
+├── tsconfig.json
+└── typings.d.ts
 ```
 
-> 提示：以上目录结构只例举关键部分，其他简单易懂后不值一提的目录在此省略。
+> 提示：以上目录结构只例举关键部分。
 
 # # 命名规范
 
