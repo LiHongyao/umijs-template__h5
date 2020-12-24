@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  user-select: none;
   &.visible {
     z-index: 999;
     opacity: 1;
@@ -27,9 +27,14 @@
 }
 
 .lg-dialog__close {
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   position: absolute;
   top: -40px;
   right: 0;
+  &.bottom {
+    top: ~'calc(100% + 20px)';
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

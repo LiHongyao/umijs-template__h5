@@ -1,3 +1,4 @@
+import classNames from 'lg-classnames';
 import React, { CSSProperties, FC, memo, useEffect, useRef } from 'react';
 import './index.less';
 interface IProps {
@@ -6,17 +7,15 @@ interface IProps {
   showCloseButton?: boolean;
   mask?: boolean;
   customStyle?: CSSProperties;
+  closeButtonPosition?: 'default' | 'bottom';
   onClose: () => void;
 }
 
-const Dialog: FC<IProps> = props => {
+const Dialog: FC<IProps> = (props) => {
   const {
     mask = true,
     showCloseButton = false,
-    visible,
-    children,
-    customStyle,
-    onClose,
+    closeButtonPosition = 'default',
   } = props;
 
   const lgWrapper = useRef<HTMLDivElement | null>(null);
@@ -25,27 +24,32 @@ const Dialog: FC<IProps> = props => {
   const onTap = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = event.target as HTMLDivElement;
     if (mask && target.classList.contains('lg-dialog')) {
-      onClose();
+      props.onClose();
     }
   };
   // effects
   useEffect(() => {
-    document.body.style.overflow = visible ? 'hidden' : 'auto';
-  }, [visible]);
+    document.body.style.overflow = props.visible ? 'hidden' : 'auto';
+  }, [props.visible]);
   // render
   return (
     <div
       ref={lgWrapper}
-      className={`lg-dialog ${visible ? 'visible' : ''}`}
+      className={`lg-dialog ${props.visible ? 'visible' : ''}`}
       onClick={onTap}
     >
-      <div className="lg-dialog__content" style={{ ...customStyle }}>
-        {children}
+      <div className="lg-dialog__content" style={{ ...props.customStyle }}>
+        {props.children}
         {showCloseButton && (
           <img
             src={require('./images/icon-close.png')}
-            className="lg-dialog__close"
-            onClick={onClose}
+            className={classNames([
+              'lg-dialog__close',
+              {
+                bottom: closeButtonPosition === 'bottom',
+              },
+            ])}
+            onClick={props.onClose}
           />
         )}
       </div>
