@@ -23,19 +23,19 @@ const Progress: FC<IProps> = (props) => {
   } = props;
 
   return (
-    <div className="lg-progress-bar">
+    <div className="lg-progress">
       {/* 进度 */}
       <div
-        className="lg-progress-bar__bg"
+        className="lg-progress__bg"
         style={{
           background: trailColor,
         }}
       >
         {/* 当前值 */}
         <div
-          className="lg-progress-bar__cur"
+          className="lg-progress__cur"
           style={{
-            width: percent + '%',
+            width: percent <= 0 ? 0 : (percent >= 100 ? 100 : percent) + '%',
             background: strokeColor,
           }}
         />
@@ -43,8 +43,8 @@ const Progress: FC<IProps> = (props) => {
         {props.nodes &&
           props.nodes.map((node, i) => (
             <section
-              key={`lg-progress-bar__node__${i}`}
-              className="lg-progress-bar__node"
+              key={`lg-progress__node__${i}`}
+              className="lg-progress__node"
               data-tips={node.tips}
               style={(() => {
                 if (node.percent <= 0) {
@@ -63,12 +63,12 @@ const Progress: FC<IProps> = (props) => {
                 }
               })()}
             >
-              <img src={node.icon} className="lg-progress-bar__icon" />
+              <img src={node.icon} className="lg-progress__icon" />
             </section>
           ))}
       </div>
       {/* 文案 */}
-      {showInfo && <div className="lg-progress-bar__tips">{percent + '%'}</div>}
+      {showInfo && <div className="lg-progress__tips">{percent + '%'}</div>}
     </div>
   );
 };
