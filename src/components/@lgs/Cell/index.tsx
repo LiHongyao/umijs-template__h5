@@ -41,7 +41,7 @@ interface IProps {
   onTap?: () => void;
   onDisabled?: () => void /** 当在禁用状态下点击时 */;
 }
-const Cell: React.FC<IProps> = props => {
+const Cell: React.FC<IProps> = (props) => {
   const {
     children,
     icon,
@@ -125,7 +125,7 @@ const Cell: React.FC<IProps> = props => {
             </section>
           )}
           {/* 内容 */}
-          {(value || renderValue) && (
+          {(value !== undefined || renderValue) && (
             <section
               className={classNames(['lg-cell__value', props.valueCls])}
               style={valueStyle}
