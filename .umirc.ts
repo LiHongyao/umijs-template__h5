@@ -1,3 +1,11 @@
+/*
+ * @Author: Li-HONGYAO
+ * @Date: 2020-11-19 20:00:28
+ * @LastEditTime: 2021-01-09 10:07:14
+ * @LastEditors: Li-HONGYAO
+ * @Description:
+ * @FilePath: /umijs-template__h5/.umirc.ts
+ */
 import { defineConfig } from 'umi';
 
 export default defineConfig({
@@ -59,9 +67,8 @@ export default defineConfig({
   ignoreMomentLocale: true,
   /** 路由管理 */
   routes: [
-    // 主页
-    { exact: true, path: '/', component: '@/pages/IndexPage' },
-    // 404
-    { path: '*', component: '@/pages/404' },
+    { path: '/', component: '@/pages/IndexPage' }, // 主页
+    { path: '/webview', component: '@/pages/Webview' },
+    { path: '*', component: '@/pages/404' }, // 404
   ],
 });
