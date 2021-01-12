@@ -26,7 +26,6 @@
     "@better-scroll/pull-down": "^2.0.7",
     "@better-scroll/pull-up": "^2.0.7",
     "@types/crypto-js": "^4.0.1",
-    "@umijs/plugin-sass": "^1.1.1",
     "@umijs/preset-react": "1.7.9",
     "@umijs/test": "^3.3.3",
     "cross-env": "^7.0.2",

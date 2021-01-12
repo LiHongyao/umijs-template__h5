@@ -1,7 +1,7 @@
 /*
  * @Author: Li-HONGYAO
  * @Date: 2020-11-19 20:00:28
- * @LastEditTime: 2021-01-09 10:07:14
+ * @LastEditTime: 2021-01-12 16:44:55
  * @LastEditors: Li-HONGYAO
  * @Description:
  * @FilePath: /umijs-template__h5/.umirc.ts
@@ -37,12 +37,6 @@ export default defineConfig({
       to: '/images',
     },
   ],*/
-
-  /** 支持sass => npm install node-sass*/
-  /*
-  sass: {
-    implementation: require('node-sass'),
-  },*/
 
   /** 启用dva状态管理 */
   dva: {},
