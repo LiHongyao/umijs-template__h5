@@ -1,3 +1,11 @@
+/*
+ * @Author: Li-HONGYAO
+ * @Date: 2020-12-09 18:07:21
+ * @LastEditTime: 2021-01-12 09:53:11
+ * @LastEditors: Li-HONGYAO
+ * @Description:
+ * @FilePath: /d-point-client/src/components/@lgs/Scroll/hooks.ts
+ */
 import { useEffect, useState } from 'react';
 import { kPullDownStatus, kPullUpStatus } from './index';
 /**
@@ -45,7 +53,7 @@ export function usePullUp(
     kPullUpStatus.INITIAL,
   );
   const onPullUp = () => {
-    if (pullUpStatus === kPullUpStatus.NO_MORE) {
+    if (pullUpStatus !== kPullUpStatus.MORE) {
       return;
     }
     setPullUpStatus(kPullUpStatus.LOADING);
